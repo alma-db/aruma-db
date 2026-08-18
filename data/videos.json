@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2026-08-19",
+    "title": "サンプル動画をここに入力",
+    "type": "LIVE",
+    "game": "Among Us",
+    "participants": ["中野あるま"],
+    "url": "https://www.youtube.com/"
+  },
+  {
+    "date": "2026-08-18",
+    "title": "サンプル動画2をここに入力",
+    "type": "VIDEO",
+    "game": "Among Us",
+    "participants": ["中野あるま"],
+    "url": "https://www.youtube.com/"
+  },
+  {
+    "date": "2026-08-17",
+    "title": "サンプルShortsをここに入力",
+    "type": "SHORT",
+    "game": "その他",
+    "participants": ["中野あるま"],
+    "url": "https://www.youtube.com/"
+  }
+]
