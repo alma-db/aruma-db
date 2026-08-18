@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>あるまDB</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>🐺 あるまDB</h1>
+    <p>中野あるまさんの活動データベース</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="controls">
+    <input id="search" type="search" placeholder="🔎 タイトル・ゲーム・出演者を検索">
+    <div class="chips">
+      <button class="chip active" data-type="ALL">すべて</button>
+      <button class="chip" data-type="LIVE">🔴 LIVE</button>
+      <button class="chip" data-type="VIDEO">🎥 動画</button>
+      <button class="chip" data-type="SHORT">📱 Shorts</button>
+    </div>
+    <div class="row">
+      <label>月 <select id="month"></select></label>
+      <label>表示 <select id="view"><option value="card">カード</option><option value="table">表</option></select></label>
+    </div>
+  </section>
+
+  <section class="summary" id="summary"></section>
+  <section id="results"></section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
