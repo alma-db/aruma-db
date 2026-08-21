@@ -16,7 +16,12 @@ const calendarMonthEl = document.querySelector("#calendarMonth");
 const prevMonthEl = document.querySelector("#prevMonth");
 const nextMonthEl = document.querySelector("#nextMonth");
 
-
+fetch("data/events.json")
+  .then(r => r.json())
+  .then(data => {
+    events = data;
+    renderEvents();
+  });
 fetch("data/videos.json")
   .then(r => r.json())
   .then(data => {
