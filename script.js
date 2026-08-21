@@ -482,37 +482,46 @@ function renderEvents() {
   today.setHours(0, 0, 0, 0);
 
   const sortedEvents = [...events].sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
+    const startA = new Date(a.startDate);
+    const startB = new Date(b.startDate);
 
-    const pastA = dateA < today;
-    const pastB = dateB < today;
-
-    if (pastA !== pastB) {
-      return pastA ? 1 : -1;
-    }
-
-    return dateA - dateB;
+    return startA - startB;
   });
 
   eventsEl.innerHTML = sortedEvents
     .map(event => {
-      const eventDate = new Date(event.date);
-      eventDate.setHours(0, 0, 0, 0);
 
-      const isPast = eventDate < today;
+      const startDate = new Date(event.startDate);
+      const endDate = new Date(event.endDate);
+
+      startDate.setHours(0, 0, 0, 0);
+      endDate.setHours(23, 59, 59, 999);
+
+      let status;
+      let statusClass;
+
+      if (today < startDate) {
+        status = "開催予定";
+        statusClass = "status-upcoming";
+      } else if (today <= endDate) {
+        status = "開催中";
+        statusClass = "status-now";
+      } else {
+        status = "終了";
+        statusClass = "status-past";
+      }
 
       return `
-        <article class="event-card ${isPast ? "event-past" : ""}">
+        <article class="event-card ${statusClass === "status-past" ? "event-past" : ""}">
 
-          <div class="event-status ${
-            isPast ? "status-past" : "status-upcoming"
-          }">
-            ${isPast ? "終了" : "開催予定"}
+          <div class="event-status ${statusClass}">
+            ${status}
           </div>
 
           <div class="event-date">
-            📅 ${formatEventDate(event.date)}
+            📅 ${formatEventDate(event.startDate)}
+            〜
+            ${formatEventDate(event.endDate)}
           </div>
 
           <h3>
