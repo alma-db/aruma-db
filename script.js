@@ -1,4 +1,5 @@
 let videos = [];
+let events = [];
 let selectedType = "ALL";
 let view = "card";
 
