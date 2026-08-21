@@ -11,8 +11,14 @@ def api(endpoint, params):
     params = dict(params)
     params["key"] = API_KEY
     url = "https://www.googleapis.com/youtube/v3/" + endpoint + "?" + urlencode(params)
-    with urlopen(url) as r:
-        return json.load(r)
+    try:
+        with urlopen(url) as r:
+            return json.load(r)
+    except Exception as e:
+        print("YouTube API error:", e)
+        if hasattr(e, "read"):
+            print(e.read().decode("utf-8"))
+        raise
 
 channel = api("channels", {"part": "contentDetails", "id": CHANNEL_ID})
 items = channel.get("items", [])
