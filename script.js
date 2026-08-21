@@ -467,3 +467,56 @@ document
     );
 
   });
+function renderEvents() {
+  const eventsEl = document.querySelector("#events");
+
+  if (!eventsEl) return;
+
+  if (!events.length) {
+    eventsEl.innerHTML =
+      '<div class="events-empty">現在お知らせするイベントはありません。</div>';
+    return;
+  }
+
+  eventsEl.innerHTML = events
+    .map(event => `
+      <article class="event-card">
+
+        <div class="event-date">
+          📅 ${escapeHtml(event.date)}
+        </div>
+
+        <h3>
+          ${escapeHtml(event.title)}
+        </h3>
+
+        ${
+          event.place
+            ? `<div class="event-place">📍 ${escapeHtml(event.place)}</div>`
+            : ""
+        }
+
+        ${
+          event.description
+            ? `<p>${escapeHtml(event.description)}</p>`
+            : ""
+        }
+
+        ${
+          event.url
+            ? `
+              <a
+                href="${event.url}"
+                target="_blank"
+                rel="noopener"
+              >
+                詳細を見る →
+              </a>
+            `
+            : ""
+        }
+
+      </article>
+    `)
+    .join("");
+}
