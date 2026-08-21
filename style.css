@@ -33,3 +33,22 @@ th{background:#f7f7f9}
   display: block;
   margin-bottom: 12px;
 }
+.thumbnail-link {
+  display: block;
+  text-decoration: none;
+}
+
+.thumbnail-link:hover {
+  opacity: 0.85;
+}
+
+.live-badge {
+  display: inline-block;
+  margin: 8px 0 4px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: bold;
+  background: #ffe5e5;
+  color: #d60000;
+}
