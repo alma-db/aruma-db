@@ -572,7 +572,10 @@ th {
 .event-past {
   opacity: 0.65;
 }
-
+.status-now {
+  background: #ffe5e5;
+  color: #d60000;
+}
 .event-past h3 {
   color: #666;
 }
