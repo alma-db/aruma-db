@@ -468,3 +468,85 @@ th {
     font-size: 11px;
   }
 }
+.events-section {
+  margin-top: 24px;
+  background: #fff;
+  border: 1px solid #e7e8ee;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 18px #00000008;
+}
+
+.events-section h2 {
+  margin: 0 0 14px;
+  font-size: 20px;
+}
+
+.event-card {
+  border: 1px solid #e7e8ee;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 10px;
+  background: #fff;
+}
+
+.event-card:last-child {
+  margin-bottom: 0;
+}
+
+.event-date {
+  font-size: 13px;
+  color: #d60000;
+  font-weight: bold;
+}
+
+.event-card h3 {
+  margin: 7px 0;
+  font-size: 17px;
+}
+
+.event-place {
+  font-size: 13px;
+  color: #666;
+}
+
+.event-card p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.event-card a {
+  display: inline-block;
+  margin-top: 5px;
+  color: #1769e0;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.events-empty {
+  padding: 20px;
+  text-align: center;
+  color: #888;
+  background: #f8f8fa;
+  border-radius: 12px;
+}
+
+@media (max-width: 600px) {
+  .events-section {
+    margin-top: 18px;
+    padding: 12px;
+  }
+
+  .events-section h2 {
+    font-size: 18px;
+  }
+
+  .event-card {
+    padding: 12px;
+  }
+
+  .event-card h3 {
+    font-size: 16px;
+  }
+}
