@@ -29,10 +29,7 @@ def api(endpoint, params):
         raise
 
 
-# ==========================================
-# ① チャンネル情報を取得
-# ==========================================
-
+# チャンネル情報
 channel = api(
     "channels",
     {
@@ -49,10 +46,7 @@ if not items:
 uploads_id = items[0]["contentDetails"]["relatedPlaylists"]["uploads"]
 
 
-# ==========================================
-# ② 過去の動画・配信を取得
-# ==========================================
-
+# 過去の動画を取得
 videos = []
 token = None
 
@@ -98,10 +92,7 @@ while True:
         break
 
 
-# ==========================================
-# ③ 現在LIVE中の配信を取得
-# ==========================================
-
+# 現在LIVE中の配信を取得
 live_page = api(
     "search",
     {
@@ -113,11 +104,15 @@ live_page = api(
     }
 )
 
+live_ids = set()
+
 for item in live_page.get("items", []):
     vid = item["id"].get("videoId")
 
     if not vid:
         continue
+
+    live_ids.add(vid)
 
     s = item["snippet"]
 
@@ -132,24 +127,28 @@ for item in live_page.get("items", []):
     })
 
 
-# ==========================================
-# ④ 重複を削除
-# ==========================================
+# 重複削除
+unique = {}
 
-unique = {
-    v["videoId"]: v
-    for v in videos
-}
+for v in videos:
+    vid = v["videoId"]
+
+    # 同じ動画が複数あった場合、
+    # 現在LIVE中ならLIVEを優先
+    if vid not in unique or vid in live_ids:
+        unique[vid] = v
 
 videos = list(unique.values())
 
 
-# ==========================================
-# ⑤ LIVEを先頭、その後は日付順
-# ==========================================
+# LIVE以外は通常の種類にする
+for v in videos:
+    if v["videoId"] not in live_ids and v["type"] == "LIVE":
+        v["type"] = "VIDEO"
 
-videos = sorted(
-    videos,
+
+# LIVEを先頭、その後は日付順
+videos.sort(
     key=lambda x: (
         x["type"] == "LIVE",
         x["date"]
@@ -158,10 +157,7 @@ videos = sorted(
 )
 
 
-# ==========================================
-# ⑥ videos.jsonを書き出し
-# ==========================================
-
+# 保存
 OUT.parent.mkdir(parents=True, exist_ok=True)
 
 OUT.write_text(
