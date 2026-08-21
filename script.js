@@ -46,8 +46,13 @@ function render(){
   }else{
     resultsEl.innerHTML=`<div class="grid">${filtered.map(v=>`
       <article class="card">
-        <div class="date">${v.date}</div>
-        <h2>${escapeHtml(v.title)}</h2>
+  <img
+    class="thumbnail"
+    src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
+    alt=""
+  >
+  <div class="date">${v.date}</div>
+  <h2>${escapeHtml(v.title)}</h2>
         <div class="meta">
           <span class="tag">${escapeHtml(v.type)}</span>
           <span class="tag">${escapeHtml(v.game)}</span>
