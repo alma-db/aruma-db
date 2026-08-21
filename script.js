@@ -46,11 +46,23 @@ function render(){
   }else{
     resultsEl.innerHTML=`<div class="grid">${filtered.map(v=>`
       <article class="card">
-  <img
-    class="thumbnail"
-    src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
-    alt=""
+  <a
+    href="${v.url}"
+    target="_blank"
+    rel="noopener"
+    class="thumbnail-link"
   >
+    <img
+      class="thumbnail"
+      src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
+      alt=""
+    >
+  </a>
+
+  ${v.type==="LIVE" ? '<div class="live-badge">🔴 NOW LIVE</div>' : ''}
+
+  <div class="date">${v.date}</div>
+  <h2>${escapeHtml(v.title)}</h2>
   <div class="date">${v.date}</div>
   <h2>${escapeHtml(v.title)}</h2>
         <div class="meta">
