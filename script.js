@@ -478,45 +478,84 @@ function renderEvents() {
     return;
   }
 
-  eventsEl.innerHTML = events
-    .map(event => `
-      <article class="event-card">
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-        <div class="event-date">
-          📅 ${escapeHtml(event.date)}
-        </div>
+  const sortedEvents = [...events].sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
 
-        <h3>
-          ${escapeHtml(event.title)}
-        </h3>
+    const pastA = dateA < today;
+    const pastB = dateB < today;
 
-        ${
-          event.place
-            ? `<div class="event-place">📍 ${escapeHtml(event.place)}</div>`
-            : ""
-        }
+    if (pastA !== pastB) {
+      return pastA ? 1 : -1;
+    }
 
-        ${
-          event.description
-            ? `<p>${escapeHtml(event.description)}</p>`
-            : ""
-        }
+    return dateA - dateB;
+  });
 
-        ${
-          event.url
-            ? `
-              <a
-                href="${event.url}"
-                target="_blank"
-                rel="noopener"
-              >
-                詳細を見る →
-              </a>
-            `
-            : ""
-        }
+  eventsEl.innerHTML = sortedEvents
+    .map(event => {
+      const eventDate = new Date(event.date);
+      eventDate.setHours(0, 0, 0, 0);
 
-      </article>
-    `)
+      const isPast = eventDate < today;
+
+      return `
+        <article class="event-card ${isPast ? "event-past" : ""}">
+
+          <div class="event-status ${
+            isPast ? "status-past" : "status-upcoming"
+          }">
+            ${isPast ? "終了" : "開催予定"}
+          </div>
+
+          <div class="event-date">
+            📅 ${formatEventDate(event.date)}
+          </div>
+
+          <h3>
+            ${escapeHtml(event.title)}
+          </h3>
+
+          ${
+            event.place
+              ? `<div class="event-place">📍 ${escapeHtml(event.place)}</div>`
+              : ""
+          }
+
+          ${
+            event.description
+              ? `<p>${escapeHtml(event.description)}</p>`
+              : ""
+          }
+
+          ${
+            event.url
+              ? `
+                <a
+                  href="${event.url}"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  詳細を見る →
+                </a>
+              `
+              : ""
+          }
+
+        </article>
+      `;
+    })
     .join("");
+}
+
+
+function formatEventDate(dateString) {
+  const date = new Date(dateString);
+
+  return `${date.getFullYear()}年${
+    date.getMonth() + 1
+  }月${date.getDate()}日`;
 }
