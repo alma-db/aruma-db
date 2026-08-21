@@ -2,35 +2,59 @@ let videos = [];
 let selectedType = "ALL";
 let view = "card";
 
+let calendarDate = new Date();
+
 const searchEl = document.querySelector("#search");
 const monthEl = document.querySelector("#month");
 const viewEl = document.querySelector("#view");
 const resultsEl = document.querySelector("#results");
 const summaryEl = document.querySelector("#summary");
 
+const calendarEl = document.querySelector("#calendar");
+const calendarMonthEl = document.querySelector("#calendarMonth");
+const prevMonthEl = document.querySelector("#prevMonth");
+const nextMonthEl = document.querySelector("#nextMonth");
+
+
 fetch("data/videos.json")
   .then(r => r.json())
   .then(data => {
-    videos = data.sort((a, b) => b.date.localeCompare(a.date));
+    videos = data.sort((a, b) =>
+      b.date.localeCompare(a.date)
+    );
+
     buildMonths();
     render();
+    renderCalendar();
   });
 
+
+/* 月選択 */
 function buildMonths() {
-  const months = [...new Set(videos.map(v => v.date.slice(0, 7)))];
+  const months = [
+    ...new Set(videos.map(v => v.date.slice(0, 7)))
+  ];
 
   monthEl.innerHTML =
     '<option value="ALL">すべて</option>' +
     months
-      .map(m => `<option value="${m}">${m.replace("-", "年")}月</option>`)
+      .map(
+        m =>
+          `<option value="${m}">
+            ${m.replace("-", "年")}月
+          </option>`
+      )
       .join("");
 }
 
+
+/* 一覧表示 */
 function render() {
   const q = searchEl.value.trim().toLowerCase();
   const month = monthEl.value;
 
   const filtered = videos.filter(v => {
+
     const text = [
       v.title,
       v.game,
@@ -39,24 +63,37 @@ function render() {
       .join(" ")
       .toLowerCase();
 
-    const okQ = !q || text.includes(q);
+    const okQ =
+      !q || text.includes(q);
+
     const okType =
-      selectedType === "ALL" || v.type === selectedType;
+      selectedType === "ALL" ||
+      v.type === selectedType;
+
     const okMonth =
-      month === "ALL" || v.date.startsWith(month);
+      month === "ALL" ||
+      v.date.startsWith(month);
 
     return okQ && okType && okMonth;
   });
 
-  summaryEl.textContent = `${filtered.length}件表示中`;
+
+  summaryEl.textContent =
+    `${filtered.length}件表示中`;
+
 
   if (!filtered.length) {
+
     resultsEl.innerHTML =
       '<div class="empty">条件に一致するデータがありません。</div>';
+
     return;
   }
 
+
+  /* 表表示 */
   if (view === "table") {
+
     resultsEl.innerHTML = `
       <table>
         <thead>
@@ -67,12 +104,16 @@ function render() {
             <th>ゲーム</th>
           </tr>
         </thead>
+
         <tbody>
+
           ${filtered
             .map(
               v => `
                 <tr>
+
                   <td>${v.date}</td>
+
                   <td>
                     <a
                       href="${v.url}"
@@ -82,21 +123,34 @@ function render() {
                       ${escapeHtml(v.title)}
                     </a>
                   </td>
+
                   <td>${v.type}</td>
-                  <td>${escapeHtml(v.game)}</td>
+
+                  <td>
+                    ${escapeHtml(v.game)}
+                  </td>
+
                 </tr>
               `
             )
             .join("")}
+
         </tbody>
       </table>
     `;
-  } else {
+
+  }
+
+  /* カード表示 */
+  else {
+
     resultsEl.innerHTML = `
       <div class="grid">
+
         ${filtered
           .map(
             v => `
+
               <article class="card">
 
                 <a
@@ -105,12 +159,15 @@ function render() {
                   rel="noopener"
                   class="thumbnail-link"
                 >
+
                   <img
                     class="thumbnail"
                     src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
                     alt=""
                   >
+
                 </a>
+
 
                 ${
                   v.type === "LIVE"
@@ -118,28 +175,47 @@ function render() {
                     : ""
                 }
 
-                <div class="date">${v.date}</div>
 
-                <h2>${escapeHtml(v.title)}</h2>
+                <div class="date">
+                  ${v.date}
+                </div>
+
+
+                <h2>
+                  ${escapeHtml(v.title)}
+                </h2>
+
 
                 <div class="meta">
+
                   <span class="tag">
                     ${escapeHtml(v.type)}
                   </span>
 
+
                   ${
                     v.game
-                      ? `<span class="tag">${escapeHtml(v.game)}</span>`
+                      ? `
+                        <span class="tag">
+                          ${escapeHtml(v.game)}
+                        </span>
+                      `
                       : ""
                   }
 
+
                   ${(v.participants || [])
                     .map(
-                      p =>
-                        `<span class="tag">${escapeHtml(p)}</span>`
+                      p => `
+                        <span class="tag">
+                          ${escapeHtml(p)}
+                        </span>
+                      `
                     )
                     .join("")}
+
                 </div>
+
 
                 <a
                   href="${v.url}"
@@ -150,17 +226,147 @@ function render() {
                 </a>
 
               </article>
+
             `
           )
           .join("")}
+
       </div>
     `;
   }
 }
 
+
+/* カレンダー */
+function renderCalendar() {
+
+  if (!calendarEl) return;
+
+
+  const year =
+    calendarDate.getFullYear();
+
+  const month =
+    calendarDate.getMonth();
+
+
+  calendarMonthEl.textContent =
+    `${year}年${month + 1}月`;
+
+
+  const firstDay =
+    new Date(year, month, 1).getDay();
+
+  const daysInMonth =
+    new Date(year, month + 1, 0).getDate();
+
+
+  let html = "";
+
+
+  /* 前月の空白 */
+  for (let i = 0; i < firstDay; i++) {
+
+    html += `
+      <div class="calendar-day empty-day"></div>
+    `;
+  }
+
+
+  /* 日付 */
+  for (let day = 1; day <= daysInMonth; day++) {
+
+    const date =
+      `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+
+    const dayVideos =
+      videos.filter(v => v.date === date);
+
+
+    html += `
+      <div class="calendar-day">
+
+        <div class="calendar-date">
+          ${day}
+        </div>
+
+        <div class="calendar-items">
+
+          ${dayVideos
+            .map(
+              v => `
+
+                <a
+                  href="${v.url}"
+                  target="_blank"
+                  rel="noopener"
+                  class="calendar-item ${getTypeClass(v.type)}"
+                  title="${escapeHtml(v.title)}"
+                >
+
+                  <img
+                    src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
+                    alt=""
+                  >
+
+                  <span>
+                    ${getTypeLabel(v.type)}
+                  </span>
+
+                </a>
+
+              `
+            )
+            .join("")}
+
+        </div>
+
+      </div>
+    `;
+  }
+
+
+  calendarEl.innerHTML = html;
+}
+
+
+/* 種類ごとのCSS */
+function getTypeClass(type) {
+
+  if (type === "LIVE") {
+    return "calendar-live";
+  }
+
+  if (type === "SHORT") {
+    return "calendar-short";
+  }
+
+  return "calendar-video";
+}
+
+
+/* 種類の表示 */
+function getTypeLabel(type) {
+
+  if (type === "LIVE") {
+    return "配信";
+  }
+
+  if (type === "SHORT") {
+    return "SHORT";
+  }
+
+  return "動画";
+}
+
+
+/* HTMLエスケープ */
 function escapeHtml(s) {
+
   return String(s).replace(
     /[&<>"']/g,
+
     c =>
       ({
         "&": "&amp;",
@@ -172,25 +378,86 @@ function escapeHtml(s) {
   );
 }
 
-searchEl.addEventListener("input", render);
 
-monthEl.addEventListener("change", render);
+/* カレンダー前月 */
+prevMonthEl.addEventListener(
+  "click",
+  () => {
 
-viewEl.addEventListener("change", e => {
-  view = e.target.value;
-  render();
-});
+    calendarDate.setMonth(
+      calendarDate.getMonth() - 1
+    );
 
-document.querySelectorAll(".chip").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document
-      .querySelectorAll(".chip")
-      .forEach(b => b.classList.remove("active"));
+    renderCalendar();
+  }
+);
 
-    btn.classList.add("active");
 
-    selectedType = btn.dataset.type;
+/* カレンダー次月 */
+nextMonthEl.addEventListener(
+  "click",
+  () => {
+
+    calendarDate.setMonth(
+      calendarDate.getMonth() + 1
+    );
+
+    renderCalendar();
+  }
+);
+
+
+/* 検索 */
+searchEl.addEventListener(
+  "input",
+  render
+);
+
+
+/* 月 */
+monthEl.addEventListener(
+  "change",
+  render
+);
+
+
+/* カード・表 */
+viewEl.addEventListener(
+  "change",
+  e => {
+
+    view = e.target.value;
 
     render();
+  }
+);
+
+
+/* LIVE・動画・SHORT */
+document
+  .querySelectorAll(".chip")
+  .forEach(btn => {
+
+    btn.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(".chip")
+          .forEach(b =>
+            b.classList.remove("active")
+          );
+
+
+        btn.classList.add("active");
+
+
+        selectedType =
+          btn.dataset.type;
+
+
+        render();
+      }
+    );
+
   });
-});
