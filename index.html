@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>あるまDB</title>
+  <title>【非公式】中野あるま活動記録🧸🍫</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
 <header>
   <div class="wrap">
     <h1>【非公式】中野あるま活動記録🧸🍫</h1>
@@ -15,56 +17,122 @@
 </header>
 
 <main class="wrap">
-  <section class="controls">
-    <input id="search" type="search" placeholder="🔎 タイトル・ゲームを検索">
-    <div class="chips">
-      <button class="chip active" data-type="ALL">すべて</button>
-      <button class="chip" data-type="LIVE">🔴 LIVE</button>
-      <button class="chip" data-type="VIDEO">🎥 動画</button>
-      <button class="chip" data-type="SHORT">📱 Shorts</button>
-    </div>
-    <div class="row">
-      <label>月 <select id="month"></select></label>
-      <label>表示 <select id="view"><option value="card">カード</option><option value="table">表</option></select></label>
-    </div>
+
+  <!-- イベント情報 -->
+  <section class="events-section">
+    <h2>📢 イベント情報</h2>
+    <div id="events"></div>
   </section>
 
-  <section class="summary" id="summary"></section>
-<section class="events-section">
-  <h2>📢 イベント情報</h2>
-  <div id="events"></div>
-</section>
-<section class="calendar-section">
-  <h2>📅 配信・動画カレンダー</h2>
 
-  <div class="calendar-header">
-    <button id="prevMonth">‹</button>
-    <div id="calendarMonth"></div>
-    <button id="nextMonth">›</button>
-  </div>
+  <!-- 配信・動画カレンダー -->
+  <section class="calendar-section">
 
-  <div class="calendar-week">
-    <div>日</div>
-    <div>月</div>
-    <div>火</div>
-    <div>水</div>
-    <div>木</div>
-    <div>金</div>
-    <div>土</div>
-  </div>
+    <h2>📅 配信・動画カレンダー</h2>
 
-  <div id="calendar" class="calendar"></div>
+    <div class="calendar-header">
+      <button id="prevMonth">‹</button>
 
-  <div class="calendar-legend">
-    <span class="legend-video">● 動画</span>
-    <span class="legend-live">● 配信</span>
-    <span class="legend-short">● SHORT</span>
-  </div>
-</section>
+      <div id="calendarMonth"></div>
 
-<section id="results"></section>
+      <button id="nextMonth">›</button>
+    </div>
+
+    <div class="calendar-week">
+      <div>日</div>
+      <div>月</div>
+      <div>火</div>
+      <div>水</div>
+      <div>木</div>
+      <div>金</div>
+      <div>土</div>
+    </div>
+
+    <div id="calendar" class="calendar"></div>
+
+    <div class="calendar-legend">
+      <span class="legend-video">● 動画</span>
+      <span class="legend-live">● 配信</span>
+      <span class="legend-short">● SHORT</span>
+    </div>
+
+  </section>
+
+
+  <!-- 検索・絞り込み -->
+  <section class="controls">
+
+    <input
+      id="search"
+      type="search"
+      placeholder="🔎 タイトル・ゲームを検索"
+    >
+
+    <div class="chips">
+
+      <button
+        class="chip active"
+        data-type="ALL"
+      >
+        すべて
+      </button>
+
+      <button
+        class="chip"
+        data-type="LIVE"
+      >
+        🔴 LIVE
+      </button>
+
+      <button
+        class="chip"
+        data-type="VIDEO"
+      >
+        🎥 動画
+      </button>
+
+      <button
+        class="chip"
+        data-type="SHORT"
+      >
+        📱 Shorts
+      </button>
+
+    </div>
+
+    <div class="row">
+
+      <label>
+        月
+        <select id="month"></select>
+      </label>
+
+      <label>
+        表示
+        <select id="view">
+          <option value="card">カード</option>
+          <option value="table">表</option>
+        </select>
+      </label>
+
+    </div>
+
+  </section>
+
+
+  <!-- 件数 -->
+  <section
+    class="summary"
+    id="summary"
+  ></section>
+
+
+  <!-- 動画一覧 -->
+  <section id="results"></section>
+
 </main>
 
 <script src="script.js"></script>
+
 </body>
 </html>
