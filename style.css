@@ -25,3 +25,11 @@ th,td{text-align:left;padding:12px;border-bottom:1px solid #eee;font-size:14px}
 th{background:#f7f7f9}
 .empty{background:#fff;border:1px dashed #ccc;border-radius:16px;padding:35px;text-align:center;color:#777}
 @media(max-width:600px){h1{font-size:24px}th:nth-child(4),td:nth-child(4){display:none}}
+.thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  margin-bottom: 12px;
+}
