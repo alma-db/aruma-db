@@ -52,3 +52,77 @@ th{background:#f7f7f9}
   background: #ffe5e5;
   color: #d60000;
 }
+@media (max-width: 600px) {
+  .wrap {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  header {
+    padding: 20px 0;
+  }
+
+  header h1 {
+    font-size: 24px;
+  }
+
+  header p {
+    font-size: 13px;
+  }
+
+  .controls {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #search,
+  #month,
+  #view {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .chips {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .chip {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .thumbnail {
+    width: 100%;
+    height: auto;
+  }
+
+  .card h2 {
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  table {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  th,
+  td {
+    padding: 7px 5px;
+  }
+}
