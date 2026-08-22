@@ -170,9 +170,8 @@ videos = list(unique.values())
 
 # 現在LIVE中のものはLIVE
 for v in videos:
-    if v["liveNow"]:
-        v["type"] = "LIVE"
 
+    v["isLive"] = v["videoId"] in live_ids
 
 # 日付順
 videos.sort(
