@@ -160,9 +160,9 @@ const displayedVideos = showAllVideos
 
         <tbody>
 
-          ${filtered
-            .map(
-              v => `
+          ${displayedVideos
+  .map(
+    v => `
 
                 <tr>
 
