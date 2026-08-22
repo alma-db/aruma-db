@@ -99,7 +99,7 @@ function render() {
               alt="">
           </a>
 
-          ${v.type === "LIVE" ? '<div class="live-badge">🔴 NOW LIVE</div>' : ""}
+          ${v.liveNow ? '<div class="live-badge">🔴 NOW LIVE</div>' : ""}
 
           <div class="date">${v.date}</div>
           <h2>${escapeHtml(v.title)}</h2>
