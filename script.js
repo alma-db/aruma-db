@@ -832,3 +832,18 @@ function formatEventDate(
     ${date.getDate()}日
   `;
 }
+document.addEventListener("click", e => {
+
+  if (e.target.id === "showMoreBtn") {
+
+    showAllVideos = !showAllVideos;
+
+    render();
+
+    window.scrollTo({
+      top: document.querySelector("#results").offsetTop - 20,
+      behavior: "smooth"
+    });
+  }
+
+});
