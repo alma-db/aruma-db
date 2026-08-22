@@ -662,3 +662,39 @@ main.wrap {
     padding: 11px;
   }
 }
+.about-section {
+  margin-top: 30px;
+  background: #fff;
+  border: 1px solid #e7e8ee;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 4px 18px #00000008;
+}
+
+.about-section h2 {
+  margin: 0 0 14px;
+  font-size: 20px;
+}
+
+.about-section p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .about-section {
+    margin-top: 24px;
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .about-section h2 {
+    font-size: 18px;
+  }
+
+  .about-section p {
+    font-size: 13px;
+  }
+}
