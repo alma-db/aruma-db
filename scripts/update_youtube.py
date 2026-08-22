@@ -83,10 +83,11 @@ while True:
             else "VIDEO"
         )
 
-        videos.append({
-            "date": s.get("publishedAt", "")[:10],
-            "title": title,
-            "type": kind,
+videos.append({
+    "date": s.get("publishedAt", "")[:10],
+    "title": title,
+    "type": kind,
+    "isLive": False,
             "liveNow": False,
             "game": "",
             "participants": [],
