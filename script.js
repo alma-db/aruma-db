@@ -311,9 +311,22 @@ const displayedVideos = showAllVideos
         )
         .join("")}
 
-    </div>
+          </div>
 
-  `;
+      ${
+        filtered.length > INITIAL_VIDEO_COUNT
+          ? `
+            <button
+              id="showMoreBtn"
+              class="show-more-btn"
+            >
+              ${showAllVideos ? "− 閉じる" : "＋ もっと見る"}
+            </button>
+          `
+          : ""
+      }
+
+    `;
 }
 
 
