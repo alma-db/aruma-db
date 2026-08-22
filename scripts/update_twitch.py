@@ -23,7 +23,10 @@ def request_json(url, headers=None, data=None):
         return json.load(response)
 
 
+# =========================
 # アクセストークン取得
+# =========================
+
 token_url = "https://id.twitch.tv/oauth2/token"
 
 token_data = urlencode({
@@ -40,16 +43,20 @@ token = request_json(
 access_token = token["access_token"]
 
 
-# ユーザー情報取得
-user_url = (
-    "https://api.twitch.tv/helix/users?"
-    + urlencode({"login": TWITCH_USER})
-)
-
 headers = {
     "Client-ID": CLIENT_ID,
     "Authorization": f"Bearer {access_token}"
 }
+
+
+# =========================
+# ユーザー情報
+# =========================
+
+user_url = (
+    "https://api.twitch.tv/helix/users?"
+    + urlencode({"login": TWITCH_USER})
+)
 
 user_data = request_json(
     user_url,
@@ -64,7 +71,61 @@ if not users:
 user_id = users[0]["id"]
 
 
+# =========================
+# 過去の配信を取得
+# =========================
+
+videos = []
+cursor = None
+
+while True:
+
+    params = {
+        "user_id": user_id,
+        "type": "archive",
+        "first": 100
+    }
+
+    if cursor:
+        params["after"] = cursor
+
+    url = (
+        "https://api.twitch.tv/helix/videos?"
+        + urlencode(params)
+    )
+
+    data = request_json(
+        url,
+        headers=headers
+    )
+
+    for item in data.get("data", []):
+
+        videos.append({
+            "date": item["created_at"][:10],
+            "title": item.get("title", ""),
+            "type": "TWITCH",
+            "platform": "Twitch",
+            "game": item.get("game_name", ""),
+            "participants": [],
+            "url": item.get(
+                "url",
+                f"https://www.twitch.tv/{TWITCH_USER}"
+            ),
+            "videoId": item.get("id", ""),
+            "thumbnail": item.get("thumbnail_url", "")
+        })
+
+    cursor = data.get("pagination", {}).get("cursor")
+
+    if not cursor:
+        break
+
+
+# =========================
 # 現在配信中か確認
+# =========================
+
 stream_url = (
     "https://api.twitch.tv/helix/streams?"
     + urlencode({"user_id": user_id})
@@ -77,26 +138,54 @@ stream_data = request_json(
 
 streams = stream_data.get("data", [])
 
-
-# 保存データ作成
-result = []
-
 if streams:
+
     stream = streams[0]
 
-    result.append({
+    videos.insert(0, {
         "date": stream["started_at"][:10],
         "title": stream.get("title", ""),
-        "type": "LIVE",
+        "type": "TWITCH",
         "platform": "Twitch",
         "game": stream.get("game_name", ""),
+        "participants": [],
         "url": f"https://www.twitch.tv/{TWITCH_USER}",
         "videoId": "",
-        "participants": []
+        "thumbnail": ""
     })
 
 
+# =========================
+# 重複削除
+# =========================
+
+unique = {}
+
+for video in videos:
+
+    video_id = video.get("videoId")
+
+    if video_id and video_id not in unique:
+        unique[video_id] = video
+
+
+videos = list(unique.values())
+
+
+# =========================
+# 日付順
+# =========================
+
+videos.sort(
+    key=lambda x: x["date"],
+    reverse=True
+)
+
+
+# =========================
 # 保存
+# =========================
+
 OUT.parent.mkdir(
     parents=True,
     exist_ok=True
@@ -104,7 +193,7 @@ OUT.parent.mkdir(
 
 OUT.write_text(
     json.dumps(
-        result,
+        videos,
         ensure_ascii=False,
         indent=2
     ),
@@ -112,5 +201,5 @@ OUT.write_text(
 )
 
 print(
-    f"Wrote {len(result)} Twitch stream(s) to {OUT}"
+    f"Wrote {len(videos)} Twitch videos to {OUT}"
 )
