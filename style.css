@@ -637,3 +637,28 @@ main.wrap {
   }
 
 }
+.show-more-btn {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 22px auto 0;
+  padding: 12px 20px;
+  border: 1px solid #d8dae2;
+  border-radius: 999px;
+  background: #fff;
+  color: #20232a;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.show-more-btn:hover {
+  background: #f6f7fb;
+}
+
+@media (max-width: 600px) {
+  .show-more-btn {
+    max-width: 100%;
+    padding: 11px;
+  }
+}
