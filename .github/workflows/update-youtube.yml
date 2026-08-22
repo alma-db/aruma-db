@@ -1,9 +1,9 @@
-name: Update YouTube database
+name: Update YouTube and Twitch database
 
 on:
   workflow_dispatch:
   schedule:
-  - cron: "17 * * * *"
+    - cron: "17 * * * *"
 
 permissions:
   contents: write
@@ -16,19 +16,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Update videos.json
+      - name: Update YouTube
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python scripts/update_youtube.py
+
+      - name: Update Twitch
+        env:
+          TWITCH_CLIENT_ID: ${{ secrets.TWITCH_CLIENT_ID }}
+          TWITCH_CLIENT_SECRET: ${{ secrets.TWITCH_CLIENT_SECRET }}
+        run: python scripts/update_twitch.py
 
       - name: Commit updated data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/videos.json
+
+          git add data/videos.json data/twitch.json
+
           if git diff --cached --quiet; then
             echo "No changes"
           else
-            git commit -m "Auto-update YouTube videos"
+            git commit -m "Auto-update YouTube and Twitch data"
             git push
           fi
