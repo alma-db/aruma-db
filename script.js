@@ -224,12 +224,11 @@ function render() {
             </a>
 
 
-            ${
-              v.type === "LIVE"
-                ? '<div class="live-badge">🔴 NOW LIVE</div>'
-                : ""
-            }
-
+${
+  v.isLive
+    ? '<div class="live-badge">🔴 NOW LIVE</div>'
+    : ""
+}
 
             <div class="date">
               ${v.date}
