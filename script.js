@@ -375,24 +375,23 @@ function renderTwitch() {
             class="thumbnail-link"
           >
 
-            ${
-              v.thumbnail
-                ? `
-                  <img
-                    class="thumbnail"
-                    src="${v.thumbnail}"
-                    alt=""
-                  >
-                `
-                : `
-                  <div class="twitch-placeholder">
-                    🟣 Twitch
-                  </div>
-                `
-            }
-
-          </a>
-
+${
+  v.thumbnail
+    ? `
+      <img
+        class="thumbnail"
+        src="${v.thumbnail
+          .replace("%{width}", "640")
+          .replace("%{height}", "360")}"
+        alt=""
+      >
+    `
+    : `
+      <div class="twitch-placeholder">
+        👾 Twitch
+      </div>
+    `
+}
 
           <div class="date">
             ${v.date}
