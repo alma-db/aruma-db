@@ -124,7 +124,9 @@ function render() {
 
   summaryEl.textContent =
     `${filtered.length}件表示中`;
-
+const displayedVideos = showAllVideos
+  ? filtered
+  : filtered.slice(0, INITIAL_VIDEO_COUNT);
 
   if (!filtered.length) {
 
