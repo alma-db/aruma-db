@@ -1,4 +1,5 @@
-import json, os
+import json
+import os
 from pathlib import Path
 from urllib.parse import urlencode
 from urllib.request import urlopen
@@ -48,12 +49,11 @@ if not items:
 uploads_id = items[0]["contentDetails"]["relatedPlaylists"]["uploads"]
 
 
-# 動画一覧を取得
+# 動画一覧
 videos = []
 token = None
 
 while True:
-
     params = {
         "part": "snippet,contentDetails",
         "playlistId": uploads_id,
@@ -66,7 +66,6 @@ while True:
     page = api("playlistItems", params)
 
     for item in page.get("items", []):
-
         s = item["snippet"]
         r = item["contentDetails"]
 
@@ -88,6 +87,7 @@ while True:
             "date": s.get("publishedAt", "")[:10],
             "title": title,
             "type": kind,
+            "liveNow": False,
             "game": "",
             "participants": [],
             "url": f"https://www.youtube.com/watch?v={vid}",
@@ -100,18 +100,10 @@ while True:
         break
 
 
-# 配信情報を確認
-# YouTube APIでは、終了した配信にも
-# liveStreamingDetails.actualStartTime が残る
-# ので、過去の配信も「LIVE」として判定できる
-video_ids = [
-    v["videoId"]
-    for v in videos
-]
-
+# 配信済み動画を判定
+video_ids = [v["videoId"] for v in videos]
 
 for i in range(0, len(video_ids), 50):
-
     batch = video_ids[i:i + 50]
 
     details = api(
@@ -123,30 +115,21 @@ for i in range(0, len(video_ids), 50):
     )
 
     for item in details.get("items", []):
-
         vid = item["id"]
-
-        streaming = item.get(
-            "liveStreamingDetails"
-        )
+        streaming = item.get("liveStreamingDetails")
 
         if not streaming:
             continue
 
         # 実際に配信された動画
         if streaming.get("actualStartTime"):
-
             for v in videos:
-
                 if v["videoId"] == vid:
-
-                    # Shortsより配信判定を優先
                     v["type"] = "LIVE"
-
                     break
 
 
-# 現在配信中のものを確認
+# 現在配信中の動画を取得
 live_page = api(
     "search",
     {
@@ -161,31 +144,32 @@ live_page = api(
 live_ids = set()
 
 for item in live_page.get("items", []):
-
     vid = item["id"].get("videoId")
 
     if vid:
         live_ids.add(vid)
 
 
+# 現在LIVE中かどうかを設定
+for v in videos:
+    v["liveNow"] = v["videoId"] in live_ids
+
+
 # 重複削除
 unique = {}
 
 for v in videos:
-
     vid = v["videoId"]
 
     if vid not in unique:
         unique[vid] = v
-
 
 videos = list(unique.values())
 
 
 # 現在LIVE中のものはLIVE
 for v in videos:
-
-    if v["videoId"] in live_ids:
+    if v["liveNow"]:
         v["type"] = "LIVE"
 
 
