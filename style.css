@@ -579,3 +579,13 @@ th {
 .event-past h3 {
   color: #666;
 }
+.events-section,
+.calendar-section,
+.controls {
+  position: static;
+  order: initial;
+}
+
+main.wrap {
+  display: block;
+}
