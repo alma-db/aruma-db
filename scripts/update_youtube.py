@@ -49,7 +49,7 @@ if not items:
 uploads_id = items[0]["contentDetails"]["relatedPlaylists"]["uploads"]
 
 
-# 動画一覧
+# 動画一覧を取得
 videos = []
 token = None
 
@@ -83,12 +83,11 @@ while True:
             else "VIDEO"
         )
 
-videos.append({
-    "date": s.get("publishedAt", "")[:10],
-    "title": title,
-    "type": kind,
-    "isLive": False,
-            "liveNow": False,
+        videos.append({
+            "date": s.get("publishedAt", "")[:10],
+            "title": title,
+            "type": kind,
+            "isLive": False,
             "game": "",
             "participants": [],
             "url": f"https://www.youtube.com/watch?v={vid}",
@@ -101,8 +100,11 @@ videos.append({
         break
 
 
-# 配信済み動画を判定
-video_ids = [v["videoId"] for v in videos]
+# 配信された動画を確認
+video_ids = [
+    v["videoId"]
+    for v in videos
+]
 
 for i in range(0, len(video_ids), 50):
     batch = video_ids[i:i + 50]
@@ -130,7 +132,7 @@ for i in range(0, len(video_ids), 50):
                     break
 
 
-# 現在配信中の動画を取得
+# 現在配信中のものを確認
 live_page = api(
     "search",
     {
@@ -151,9 +153,9 @@ for item in live_page.get("items", []):
         live_ids.add(vid)
 
 
-# 現在LIVE中かどうかを設定
+# 現在配信中かどうかを設定
 for v in videos:
-    v["liveNow"] = v["videoId"] in live_ids
+    v["isLive"] = v["videoId"] in live_ids
 
 
 # 重複削除
@@ -167,11 +169,6 @@ for v in videos:
 
 videos = list(unique.values())
 
-
-# 現在LIVE中のものはLIVE
-for v in videos:
-
-    v["isLive"] = v["videoId"] in live_ids
 
 # 日付順
 videos.sort(
