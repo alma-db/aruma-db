@@ -3,7 +3,8 @@ let events = [];
 
 let selectedType = "ALL";
 let view = "card";
-
+let showAllVideos = false;
+const INITIAL_VIDEO_COUNT = 6;
 let calendarDate = new Date();
 
 const searchEl = document.querySelector("#search");
