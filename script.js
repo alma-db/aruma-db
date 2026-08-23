@@ -294,7 +294,7 @@ function render() {
                 target="_blank"
                 rel="noopener"
               >
-                YouTubeで見る →
+${v.platform === "Twitch" ? "Twitchで見る →" : "YouTubeで見る →"}
               </a>
 
             </article>
