@@ -235,11 +235,15 @@ function render() {
                 rel="noopener"
                 class="thumbnail-link"
               >
-                <img
-                  class="thumbnail"
-                  src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
-                  alt=""
-                >
+<img
+  class="thumbnail"
+  src="${
+    v.platform === "Twitch"
+      ? v.thumbnail
+      : `https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg`
+  }"
+  alt=""
+/>
               </a>
 
               ${
