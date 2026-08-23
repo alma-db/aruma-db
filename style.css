@@ -698,3 +698,12 @@ main.wrap {
     font-size: 13px;
   }
 }
+.calendar-twitcasting {
+  background: #f1e8ff;
+  color: #7a3db8;
+  border-radius: 6px;
+  padding: 5px 3px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+}
