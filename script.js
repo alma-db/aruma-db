@@ -61,15 +61,19 @@ Promise.all([
 ])
   .then(([youtubeData, twitchData]) => {
 
-    videos = [
-      ...youtubeData,
-      ...twitchData
-    ].sort((a, b) =>
+    // YouTube
+    videos = youtubeData.sort((a, b) =>
+      b.date.localeCompare(a.date)
+    );
+
+    // Twitch
+    twitchVideos = twitchData.sort((a, b) =>
       b.date.localeCompare(a.date)
     );
 
     buildMonths();
     render();
+    renderTwitch();
     renderCalendar();
   })
   .catch(error => {
