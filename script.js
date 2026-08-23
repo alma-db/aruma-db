@@ -122,7 +122,7 @@ function renderTwitch() {
         <h2>${escapeHtml(v.title)}</h2>
         <div class="meta">
           <a href="${v.url}" target="_blank" rel="noopener">Twitchで見る →</a>
-          <span class="tag">👾 Twitch</span>
+          <span class="tag">
           ${v.game ? `<span class="tag">${escapeHtml(v.game)}</span>` : ""}
         </div>
       </article>`).join("")}</div>
