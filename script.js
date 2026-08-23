@@ -116,7 +116,13 @@ function renderTwitch() {
     <div class="grid">${list.map(v => `
       <article class="card">
         <a href="${v.url}" target="_blank" rel="noopener" class="thumbnail-link">
-          <img class="thumbnail" src="${v.thumbnail || ""}" alt="">
+<img
+  class="thumbnail"
+  src="${(v.thumbnail || "")
+    .replace("%{width}", "640")
+    .replace("%{height}", "360")}"
+  alt=""
+>
         </a>
         <div class="date">${v.date}</div>
         <h2>${escapeHtml(v.title)}</h2>
