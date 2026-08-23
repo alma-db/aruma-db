@@ -1,14 +1,12 @@
 let videos = [];
-let twitchVideos = [];
 let events = [];
+let twitcasting = [];
 
 let selectedType = "ALL";
 let view = "card";
-
 let showAllVideos = false;
-let showAllTwitch = false;
 
-const INITIAL_COUNT = 6;
+const INITIAL_VIDEO_COUNT = 6;
 
 let calendarDate = new Date();
 
@@ -17,7 +15,6 @@ const monthEl = document.querySelector("#month");
 const viewEl = document.querySelector("#view");
 
 const resultsEl = document.querySelector("#results");
-const twitchResultsEl = document.querySelector("#twitchResults");
 const summaryEl = document.querySelector("#summary");
 
 const calendarEl = document.querySelector("#calendar");
@@ -28,33 +25,48 @@ const nextMonthEl = document.querySelector("#nextMonth");
 
 
 /* =========================
-   データ読み込み
+   イベント読み込み
 ========================= */
 
-Promise.all([
-  fetch("data/videos.json").then(r => r.json()),
-  fetch("data/twitch.json").then(r => r.json()),
-  fetch("data/events.json").then(r => r.json())
-])
-.then(([youtubeData, twitchData, eventData]) => {
+fetch("data/events.json")
+  .then(r => r.json())
+  .then(data => {
+    events = data;
+    renderEvents();
+  });
 
-  videos = youtubeData.sort(
-    (a, b) => b.date.localeCompare(a.date)
-  );
 
-  twitchVideos = twitchData.sort(
-    (a, b) => b.date.localeCompare(a.date)
-  );
+/* =========================
+   ツイキャス読み込み
+========================= */
 
-  events = eventData;
+fetch("data/twitcasting.json")
+  .then(r => r.json())
+  .then(data => {
+    twitcasting = data;
+    renderCalendar();
+  })
+  .catch(() => {
+    twitcasting = [];
+  });
 
-  buildMonths();
-  render();
-  renderTwitch();
-  renderEvents();
-  renderCalendar();
 
-});
+/* =========================
+   YouTube・Twitch読み込み
+========================= */
+
+fetch("data/videos.json")
+  .then(r => r.json())
+  .then(data => {
+
+    videos = data.sort((a, b) =>
+      b.date.localeCompare(a.date)
+    );
+
+    buildMonths();
+    render();
+    renderCalendar();
+  });
 
 
 /* =========================
@@ -63,34 +75,25 @@ Promise.all([
 
 function buildMonths() {
 
-  const allVideos = [
-    ...videos,
-    ...twitchVideos
-  ];
-
   const months = [
     ...new Set(
-      allVideos.map(v => v.date.slice(0, 7))
+      videos.map(v => v.date.slice(0, 7))
     )
   ];
 
   monthEl.innerHTML =
     '<option value="ALL">すべて</option>' +
     months
-      .sort()
-      .reverse()
       .map(
         m =>
-          `<option value="${m}">
-            ${m.replace("-", "年")}月
-          </option>`
+          `<option value="${m}">${m.replace("-", "年")}月</option>`
       )
       .join("");
 }
 
 
 /* =========================
-   YouTube一覧
+   動画一覧
 ========================= */
 
 function render() {
@@ -109,8 +112,8 @@ function render() {
         v.game,
         ...(v.participants || [])
       ]
-      .join(" ")
-      .toLowerCase();
+        .join(" ")
+        .toLowerCase();
 
       const okQ =
         !q || text.includes(q);
@@ -124,12 +127,17 @@ function render() {
         v.date.startsWith(month);
 
       return okQ && okType && okMonth;
-
     });
 
 
   summaryEl.textContent =
     `${filtered.length}件表示中`;
+
+
+  const displayedVideos =
+    showAllVideos
+      ? filtered
+      : filtered.slice(0, INITIAL_VIDEO_COUNT);
 
 
   if (!filtered.length) {
@@ -141,18 +149,14 @@ function render() {
   }
 
 
-  const displayed =
-    showAllVideos
-      ? filtered
-      : filtered.slice(0, INITIAL_COUNT);
-
+  /* =========================
+     表表示
+  ========================= */
 
   if (view === "table") {
 
     resultsEl.innerHTML = `
-
       <table>
-
         <thead>
           <tr>
             <th>日付</th>
@@ -163,298 +167,146 @@ function render() {
         </thead>
 
         <tbody>
+          ${displayedVideos
+            .map(
+              v => `
+                <tr>
+                  <td>${v.date}</td>
 
-          ${displayed.map(v => `
+                  <td>
+                    <a
+                      href="${v.url}"
+                      target="_blank"
+                      rel="noopener"
+                    >
+                      ${escapeHtml(v.title)}
+                    </a>
+                  </td>
 
-            <tr>
+                  <td>${escapeHtml(v.type)}</td>
 
-              <td>${v.date}</td>
-
-              <td>
-                <a
-                  href="${v.url}"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  ${escapeHtml(v.title)}
-                </a>
-              </td>
-
-              <td>
-                ${escapeHtml(v.type)}
-              </td>
-
-              <td>
-                ${escapeHtml(v.game || "")}
-              </td>
-
-            </tr>
-
-          `).join("")}
-
+                  <td>${escapeHtml(v.game || "")}</td>
+                </tr>
+              `
+            )
+            .join("")}
         </tbody>
-
       </table>
 
-    `;
-
-  } else {
-
-    resultsEl.innerHTML = `
-
-      <div class="grid">
-
-        ${displayed.map(v => `
-
-          <article class="card">
-
-            <a
-              href="${v.url}"
-              target="_blank"
-              rel="noopener"
-              class="thumbnail-link"
-            >
-
-              <img
-                class="thumbnail"
-                src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
-                alt=""
-              >
-
-            </a>
-
-
-${
-  v.isLive
-    ? '<div class="live-badge">🔴 NOW LIVE</div>'
-    : ""
-}
-
-            <div class="date">
-              ${v.date}
-            </div>
-
-
-            <h2>
-              ${escapeHtml(v.title)}
-            </h2>
-
-
-            <div class="meta">
-
-              <span class="tag">
-                ${escapeHtml(v.type)}
-              </span>
-
-              ${
-                v.game
-                  ? `
-                    <span class="tag">
-                      ${escapeHtml(v.game)}
-                    </span>
-                  `
-                  : ""
-              }
-
-              ${(v.participants || [])
-                .map(p => `
-                  <span class="tag">
-                    ${escapeHtml(p)}
-                  </span>
-                `)
-                .join("")}
-
-            </div>
-
-
-            <a
-              href="${v.url}"
-              target="_blank"
-              rel="noopener"
-            >
-              YouTubeで見る →
-            </a>
-
-          </article>
-
-        `).join("")}
-
-      </div>
-
       ${
-        filtered.length > INITIAL_COUNT
+        filtered.length > INITIAL_VIDEO_COUNT
           ? `
-            <button
-              id="showMoreBtn"
-              class="show-more-btn"
-            >
-              ${showAllVideos
-                ? "− 閉じる"
-                : "＋ もっと見る"}
+            <button id="showMoreBtn" class="show-more-btn">
+              ${showAllVideos ? "− 閉じる" : "＋ もっと見る"}
             </button>
           `
           : ""
       }
-
     `;
-
-  }
-
-}
-
-
-/* =========================
-   Twitch一覧
-========================= */
-
-function renderTwitch() {
-
-  if (!twitchResultsEl) return;
-
-
-  const q =
-    searchEl.value.trim().toLowerCase();
-
-  const month =
-    monthEl.value;
-
-
-  const filtered =
-    twitchVideos.filter(v => {
-
-      const text = [
-        v.title,
-        v.game
-      ]
-      .join(" ")
-      .toLowerCase();
-
-
-      const okQ =
-        !q || text.includes(q);
-
-
-      const okMonth =
-        month === "ALL" ||
-        v.date.startsWith(month);
-
-
-      return okQ && okMonth;
-
-    });
-
-
-  if (!filtered.length) {
-
-    twitchResultsEl.innerHTML =
-      '<div class="empty">Twitchの配信はありません。</div>';
 
     return;
   }
 
 
-  const displayed =
-    showAllTwitch
-      ? filtered
-      : filtered.slice(0, INITIAL_COUNT);
+  /* =========================
+     カード表示
+  ========================= */
 
-
-  twitchResultsEl.innerHTML = `
+  resultsEl.innerHTML = `
 
     <div class="grid">
 
-      ${displayed.map(v => `
+      ${displayedVideos
+        .map(
+          v => `
 
-        <article class="card twitch-card">
+            <article class="card">
 
-          <a
-            href="${v.url}"
-            target="_blank"
-            rel="noopener"
-            class="thumbnail-link"
-          >
+              <a
+                href="${v.url}"
+                target="_blank"
+                rel="noopener"
+                class="thumbnail-link"
+              >
+                <img
+                  class="thumbnail"
+                  src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
+                  alt=""
+                >
+              </a>
 
-${
-  v.thumbnail
-    ? `
-      <img
-        class="thumbnail"
-        src="${v.thumbnail
-          .replace("%{width}", "640")
-          .replace("%{height}", "360")}"
-        alt=""
-      >
-    `
-    : `
-      <div class="twitch-placeholder">
-        👾 Twitch
-      </div>
-    `
-}
+              ${
+                v.type === "LIVE" &&
+                v.isLive
+                  ? '<div class="live-badge">🔴 NOW LIVE</div>'
+                  : ""
+              }
 
-          <div class="date">
-            ${v.date}
-          </div>
+              <div class="date">
+                ${v.date}
+              </div>
 
+              <h2>
+                ${escapeHtml(v.title)}
+              </h2>
 
-          <h2>
-            ${escapeHtml(v.title)}
-          </h2>
+              <div class="meta">
 
+                <span class="tag">
+                  ${escapeHtml(v.type)}
+                </span>
 
-          <div class="meta">
+                ${
+                  v.game
+                    ? `
+                      <span class="tag">
+                        ${escapeHtml(v.game)}
+                      </span>
+                    `
+                    : ""
+                }
 
-            <span class="tag twitch-tag">
-              🟣 Twitch
-            </span>
+                ${(v.participants || [])
+                  .map(
+                    p => `
+                      <span class="tag">
+                        ${escapeHtml(p)}
+                      </span>
+                    `
+                  )
+                  .join("")}
 
-            ${
-              v.game
-                ? `
-                  <span class="tag">
-                    ${escapeHtml(v.game)}
-                  </span>
-                `
-                : ""
-            }
+              </div>
 
-          </div>
+              <a
+                href="${v.url}"
+                target="_blank"
+                rel="noopener"
+              >
+                YouTubeで見る →
+              </a>
 
-
-          <a
-            href="${v.url}"
-            target="_blank"
-            rel="noopener"
-          >
-            Twitchで見る →
-          </a>
-
-        </article>
-
-      `).join("")}
+            </article>
+          `
+        )
+        .join("")}
 
     </div>
 
-
     ${
-      filtered.length > INITIAL_COUNT
+      filtered.length > INITIAL_VIDEO_COUNT
         ? `
           <button
-            id="showMoreTwitchBtn"
+            id="showMoreBtn"
             class="show-more-btn"
           >
-            ${
-              showAllTwitch
-                ? "− 閉じる"
-                : "＋ もっと見る"
-            }
+            ${showAllVideos ? "− 閉じる" : "＋ もっと見る"}
           </button>
         `
         : ""
     }
 
   `;
-
 }
 
 
@@ -466,17 +318,14 @@ function renderCalendar() {
 
   if (!calendarEl) return;
 
-
   const year =
     calendarDate.getFullYear();
 
   const month =
     calendarDate.getMonth();
 
-
   calendarMonthEl.textContent =
     `${year}年${month + 1}月`;
-
 
   const firstDay =
     new Date(year, month, 1).getDay();
@@ -484,17 +333,20 @@ function renderCalendar() {
   const daysInMonth =
     new Date(year, month + 1, 0).getDate();
 
-
   let html = "";
 
 
+  /* 前月の空白 */
+
   for (let i = 0; i < firstDay; i++) {
 
-    html +=
-      `<div class="calendar-day empty-day"></div>`;
-
+    html += `
+      <div class="calendar-day empty-day"></div>
+    `;
   }
 
+
+  /* 日付 */
 
   for (
     let day = 1;
@@ -509,12 +361,12 @@ function renderCalendar() {
     const dayVideos =
       videos.filter(v => v.date === date);
 
-    const dayTwitch =
-      twitchVideos.filter(v => v.date === date);
+
+    const dayTwitcasting =
+      twitcasting.filter(t => t.date === date);
 
 
     html += `
-
       <div class="calendar-day">
 
         <div class="calendar-date">
@@ -523,79 +375,54 @@ function renderCalendar() {
 
         <div class="calendar-items">
 
-          ${dayVideos.map(v => `
+          ${dayVideos
+            .map(
+              v => `
+                <a
+                  href="${v.url}"
+                  target="_blank"
+                  rel="noopener"
+                  class="calendar-item ${getTypeClass(v.type)}"
+                  title="${escapeHtml(v.title)}"
+                >
 
-            <a
-              href="${v.url}"
-              target="_blank"
-              rel="noopener"
-              class="calendar-item ${getTypeClass(v.type)}"
-              title="${escapeHtml(v.title)}"
-            >
+                  <img
+                    src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
+                    alt=""
+                  >
 
-              <img
-                src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
-                alt=""
-              >
+                  <span>
+                    ${getTypeLabel(v.type)}
+                  </span>
 
-              <span>
-                ${getTypeLabel(v.type)}
-              </span>
-
-            </a>
-
-          `).join("")}
+                </a>
+              `
+            )
+            .join("")}
 
 
-          ${dayTwitch.map(v => `
-
-            <a
-              href="${v.url}"
-              target="_blank"
-              rel="noopener"
-              class="calendar-item calendar-twitch"
-              title="${escapeHtml(v.title)}"
-            >
-
-              ${
-                v.thumbnail
-                  ? `
-                    <img
-                      src="${v.thumbnail}"
-                      alt=""
-                    >
-                  `
-                  : `
-                    <div class="twitch-calendar-placeholder">
-                      🟣
-                    </div>
-                  `
-              }
-
-              <span>
-                Twitch
-              </span>
-
-            </a>
-
-          `).join("")}
+          ${
+            dayTwitcasting.length
+              ? `
+                <div class="calendar-twitcasting">
+                  🎙️ ツイキャス
+                </div>
+              `
+              : ""
+          }
 
         </div>
 
       </div>
-
     `;
-
   }
 
-
   calendarEl.innerHTML = html;
-
 }
 
 
 /* =========================
-   カレンダー色
+   カレンダーの色
 ========================= */
 
 function getTypeClass(type) {
@@ -608,10 +435,17 @@ function getTypeClass(type) {
     return "calendar-short";
   }
 
-  return "calendar-video";
+  if (type === "TWITCH") {
+    return "calendar-twitch";
+  }
 
+  return "calendar-video";
 }
 
+
+/* =========================
+   カレンダー表示名
+========================= */
 
 function getTypeLabel(type) {
 
@@ -623,8 +457,11 @@ function getTypeLabel(type) {
     return "SHORT";
   }
 
-  return "動画";
+  if (type === "TWITCH") {
+    return "👾 Twitch";
+  }
 
+  return "動画";
 }
 
 
@@ -634,8 +471,9 @@ function getTypeLabel(type) {
 
 function escapeHtml(s) {
 
-  return String(s || "").replace(
+  return String(s).replace(
     /[&<>"']/g,
+
     c =>
       ({
         "&": "&amp;",
@@ -645,12 +483,11 @@ function escapeHtml(s) {
         "'": "&#39;"
       })[c]
   );
-
 }
 
 
 /* =========================
-   カレンダー操作
+   カレンダー前月
 ========================= */
 
 prevMonthEl.addEventListener(
@@ -662,10 +499,13 @@ prevMonthEl.addEventListener(
     );
 
     renderCalendar();
-
   }
 );
 
+
+/* =========================
+   カレンダー次月
+========================= */
 
 nextMonthEl.addEventListener(
   "click",
@@ -676,48 +516,49 @@ nextMonthEl.addEventListener(
     );
 
     renderCalendar();
-
   }
 );
 
 
 /* =========================
-   検索・絞り込み
+   検索
 ========================= */
 
 searchEl.addEventListener(
   "input",
-  () => {
-
-    render();
-    renderTwitch();
-
-  }
+  render
 );
 
+
+/* =========================
+   月選択
+========================= */
 
 monthEl.addEventListener(
   "change",
-  () => {
-
-    render();
-    renderTwitch();
-
-  }
+  render
 );
 
+
+/* =========================
+   カード・表
+========================= */
 
 viewEl.addEventListener(
   "change",
   e => {
 
-    view = e.target.value;
+    view =
+      e.target.value;
 
     render();
-
   }
 );
 
+
+/* =========================
+   LIVE・動画・SHORT
+========================= */
 
 document
   .querySelectorAll(".chip")
@@ -739,11 +580,8 @@ document
           btn.dataset.type;
 
         render();
-        renderTwitch();
-
       }
     );
-
   });
 
 
@@ -755,34 +593,26 @@ document.addEventListener(
   "click",
   e => {
 
-    if (e.target.id === "showMoreBtn") {
-
-      showAllVideos =
-        !showAllVideos;
-
-      render();
-
+    if (e.target.id !== "showMoreBtn") {
+      return;
     }
 
+    showAllVideos =
+      !showAllVideos;
 
-    if (
-      e.target.id ===
-      "showMoreTwitchBtn"
-    ) {
+    render();
 
-      showAllTwitch =
-        !showAllTwitch;
-
-      renderTwitch();
-
-    }
-
+    window.scrollTo({
+      top:
+        document.querySelector("#results").offsetTop - 20,
+      behavior: "smooth"
+    });
   }
 );
 
 
 /* =========================
-   イベント
+   イベント情報
 ========================= */
 
 function renderEvents() {
@@ -792,22 +622,23 @@ function renderEvents() {
 
   if (!eventsEl) return;
 
-
   if (!events.length) {
 
     eventsEl.innerHTML =
       '<div class="events-empty">現在お知らせするイベントはありません。</div>';
 
     return;
-
   }
-
 
   const today =
     new Date();
 
-  today.setHours(0, 0, 0, 0);
-
+  today.setHours(
+    0,
+    0,
+    0,
+    0
+  );
 
   const sortedEvents =
     [...events].sort(
@@ -816,124 +647,110 @@ function renderEvents() {
         new Date(b.startDate)
     );
 
-
   eventsEl.innerHTML =
-    sortedEvents.map(event => {
+    sortedEvents
+      .map(event => {
 
-      const startDate =
-        new Date(event.startDate);
+        const startDate =
+          new Date(event.startDate);
 
-      const endDate =
-        new Date(event.endDate);
+        const endDate =
+          new Date(event.endDate);
 
-      startDate.setHours(
-        0, 0, 0, 0
-      );
+        startDate.setHours(
+          0, 0, 0, 0
+        );
 
-      endDate.setHours(
-        23, 59, 59, 999
-      );
+        endDate.setHours(
+          23, 59, 59, 999
+        );
 
+        let status;
+        let statusClass;
 
-      let status;
-      let statusClass;
+        if (today < startDate) {
 
+          status = "開催予定";
+          statusClass = "status-upcoming";
 
-      if (today < startDate) {
+        } else if (today <= endDate) {
 
-        status = "開催予定";
-        statusClass = "status-upcoming";
+          status = "開催中";
+          statusClass = "status-now";
 
-      } else if (
-        today <= endDate
-      ) {
+        } else {
 
-        status = "開催中";
-        statusClass = "status-now";
+          status = "終了";
+          statusClass = "status-past";
+        }
 
-      } else {
-
-        status = "終了";
-        statusClass = "status-past";
-
-      }
-
-
-      return `
-
-        <article
-          class="event-card ${
-            statusClass === "status-past"
-              ? "event-past"
-              : ""
-          }"
-        >
-
-          <div
-            class="event-status ${statusClass}"
+        return `
+          <article
+            class="event-card ${
+              statusClass === "status-past"
+                ? "event-past"
+                : ""
+            }"
           >
-            ${status}
-          </div>
 
+            <div class="event-status ${statusClass}">
+              ${status}
+            </div>
 
-          <div class="event-date">
-            📅
-            ${formatEventDate(event.startDate)}
-            〜
-            ${formatEventDate(event.endDate)}
-          </div>
+            <div class="event-date">
+              📅 ${formatEventDate(event.startDate)}
+              〜
+              ${formatEventDate(event.endDate)}
+            </div>
 
+            <h3>
+              ${escapeHtml(event.title)}
+            </h3>
 
-          <h3>
-            ${escapeHtml(event.title)}
-          </h3>
+            ${
+              event.place
+                ? `
+                  <div class="event-place">
+                    📍 ${escapeHtml(event.place)}
+                  </div>
+                `
+                : ""
+            }
 
+            ${
+              event.description
+                ? `
+                  <p>
+                    ${escapeHtml(event.description)}
+                  </p>
+                `
+                : ""
+            }
 
-          ${
-            event.place
-              ? `
-                <div class="event-place">
-                  📍
-                  ${escapeHtml(event.place)}
-                </div>
-              `
-              : ""
-          }
+            ${
+              event.url
+                ? `
+                  <a
+                    href="${event.url}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    詳細を見る →
+                  </a>
+                `
+                : ""
+            }
 
-
-          ${
-            event.description
-              ? `
-                <p>
-                  ${escapeHtml(event.description)}
-                </p>
-              `
-              : ""
-          }
-
-
-          ${
-            event.url
-              ? `
-                <a
-                  href="${event.url}"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  詳細を見る →
-                </a>
-              `
-              : ""
-          }
-
-        </article>
-
-      `;
-
-    }).join("");
-
+          </article>
+        `;
+      })
+      .join("");
 }
 
+
+/* =========================
+   イベント日付
+========================= */
 
 function formatEventDate(dateString) {
 
@@ -943,5 +760,4 @@ function formatEventDate(dateString) {
   return `${date.getFullYear()}年${
     date.getMonth() + 1
   }月${date.getDate()}日`;
-
 }
