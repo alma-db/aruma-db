@@ -159,8 +159,9 @@ function renderCalendar() {
 
   for (let d=1;d<=days;d++) {
     const date = `${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-    const dayVideos = videos.filter(v => v.date === date);
-    const hasCast = twitcasting.some(t => t.date === date);
+const dayVideos = videos.filter(v => v.date === date);
+const dayTwitch = twitchVideos.filter(v => v.date === date);
+const hasCast = twitcasting.some(t => t.date === date);
 
     html += `
       <div class="calendar-day">
