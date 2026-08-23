@@ -24,17 +24,13 @@
     <div id="events"></div>
   </section>
 
-
   <!-- 配信・動画カレンダー -->
   <section class="calendar-section">
-
     <h2>📅 配信・動画カレンダー</h2>
 
     <div class="calendar-header">
       <button id="prevMonth">‹</button>
-
       <div id="calendarMonth"></div>
-
       <button id="nextMonth">›</button>
     </div>
 
@@ -55,13 +51,10 @@
       <span class="legend-live">● 配信</span>
       <span class="legend-short">● SHORT</span>
     </div>
-
   </section>
-
 
   <!-- 検索・絞り込み -->
   <section class="controls">
-
     <input
       id="search"
       type="search"
@@ -69,39 +62,13 @@
     >
 
     <div class="chips">
-
-      <button
-        class="chip active"
-        data-type="ALL"
-      >
-        すべて
-      </button>
-
-      <button
-        class="chip"
-        data-type="LIVE"
-      >
-        🔴 LIVE
-      </button>
-
-      <button
-        class="chip"
-        data-type="VIDEO"
-      >
-        🎥 動画
-      </button>
-
-      <button
-        class="chip"
-        data-type="SHORT"
-      >
-        📱 Shorts
-      </button>
-
+      <button class="chip active" data-type="ALL">すべて</button>
+      <button class="chip" data-type="LIVE">🔴 LIVE</button>
+      <button class="chip" data-type="VIDEO">🎥 動画</button>
+      <button class="chip" data-type="SHORT">📱 Shorts</button>
     </div>
 
     <div class="row">
-
       <label>
         月
         <select id="month"></select>
@@ -114,59 +81,50 @@
           <option value="table">表</option>
         </select>
       </label>
-
     </div>
-
   </section>
 
-
   <!-- 件数 -->
-  <section
-    class="summary"
-    id="summary"
-  ></section>
+  <section class="summary" id="summary"></section>
 
+  <!-- YouTube -->
+  <section class="videos-section">
+    <h2>🎥 YouTube</h2>
+    <div id="results"></div>
+  </section>
 
-<!-- YouTube一覧 -->
-<section class="videos-section">
-  <h2>🎥 YouTube</h2>
-  <div id="results"></div>
-</section>
+  <!-- Twitch -->
+  <section class="twitch-section">
+    <h2>👾 Twitch</h2>
+    <div id="twitchResults"></div>
+  </section>
 
-<!-- Twitch一覧 -->
-<section class="twitch-section">
-  <h2>👾 Twitch</h2>
-  <section id="twitchResults"></section>
-</section>
+  <!-- このサイトについて -->
+  <section class="about-section">
+    <h2>📖 このサイトについて</h2>
 
-<section class="about-section">
-  <h2>📖 このサイトについて</h2>
+    <p>
+      <strong>【非公式】中野あるま活動記録🧸🍫</strong>は、
+      中野あるまさんの活動を楽しく振り返れるように、
+      動画・配信・イベント情報などを個人でまとめているファンサイトです。
+    </p>
 
-  <p>
-    <strong>【非公式】中野あるま活動記録🧸🍫</strong>は、
-    中野あるまさんの活動を楽しく振り返れるように、
-    動画・配信・イベント情報などを個人でまとめているファンサイトです。
-  </p>
+    <p>
+      本サイトは中野あるまさんご本人・公式関係者・関係各所とは一切関係のない、
+      個人による非公式サイトです。
+    </p>
 
-  <p>
-    本サイトは中野あるまさんご本人・公式関係者・関係各所とは一切関係のない、
-    個人による非公式サイトです。
-  </p>
+    <p>
+      動画や画像、サムネイル等は各サービス・権利者のものを使用しています。
+      権利はそれぞれの権利者に帰属します。
+    </p>
 
-  <p>
-    動画や画像、サムネイル等は各サービス・権利者のものを使用しています。
-    権利はそれぞれの権利者に帰属します。
-  </p>
+    <p>
+      情報の誤りや不具合、追加してほしい情報などがありましたら、
+      制作者 【公認】中野あるまスケジュール(@alma_schedule)までご連絡ください。
+    </p>
+  </section>
 
-  <p>
-    情報の誤りや不具合、追加してほしい情報などがありましたら、
-    制作者 【公認】中野あるまスケジュール(@alma_schedule)までご連絡ください。
-  </p>
-</section>
-
-</main>
-
-<script src="script.js"></script>
 </main>
 
 <script src="script.js"></script>
