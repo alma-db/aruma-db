@@ -1,7 +1,7 @@
 let videos = [];
+let twitchVideos = [];
 let events = [];
 let twitcasting = [];
-
 let selectedType = "ALL";
 let view = "card";
 let showAllVideos = false;
