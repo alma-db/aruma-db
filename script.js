@@ -167,7 +167,23 @@ const hasCast = twitcasting.some(t => t.date === date);
       <div class="calendar-day">
         <div class="calendar-date">${d}</div>
         <div class="calendar-items">
-          ${dayVideos.map(v => `
+${dayTwitch.map(v => `
+  <a
+    href="${v.url}"
+    target="_blank"
+    rel="noopener"
+    class="calendar-item calendar-twitch"
+    title="${escapeHtml(v.title)}"
+  >
+    <img
+      src="${(v.thumbnail || "")
+        .replace("%{width}", "320")
+        .replace("%{height}", "180")}"
+      alt=""
+    >
+    <span>👾 Twitch</span>
+  </a>
+`).join("")}
             <a href="${v.url}" target="_blank" rel="noopener"
               class="calendar-item ${getTypeClass(v.type)}"
               title="${escapeHtml(v.title)}">
