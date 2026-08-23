@@ -55,19 +55,26 @@ fetch("data/twitcasting.json")
    YouTube・Twitch読み込み
 ========================= */
 
-fetch("data/videos.json")
-  .then(r => r.json())
-  .then(data => {
+Promise.all([
+  fetch("data/videos.json").then(r => r.json()),
+  fetch("data/twitch.json").then(r => r.json())
+])
+  .then(([youtubeData, twitchData]) => {
 
-    videos = data.sort((a, b) =>
+    videos = [
+      ...youtubeData,
+      ...twitchData
+    ].sort((a, b) =>
       b.date.localeCompare(a.date)
     );
 
     buildMonths();
     render();
     renderCalendar();
+  })
+  .catch(error => {
+    console.error("動画データの読み込みに失敗しました:", error);
   });
-
 
 /* =========================
    月選択
