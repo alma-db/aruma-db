@@ -301,13 +301,6 @@ function render() {
 
               </div>
 
-              <a
-                href="${v.url}"
-                target="_blank"
-                rel="noopener"
-              >
-${v.platform === "Twitch" ? "Twitchで見る →" : "YouTubeで見る →"}
-              </a>
 
             </article>
           `
