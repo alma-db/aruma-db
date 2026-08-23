@@ -784,3 +784,91 @@ function formatEventDate(dateString) {
     date.getMonth() + 1
   }月${date.getDate()}日`;
 }
+/* =========================
+   Twitch一覧
+========================= */
+
+function renderTwitch() {
+
+  const twitchResultsEl =
+    document.querySelector("#twitchResults");
+
+  if (!twitchResultsEl) return;
+
+  if (!twitchVideos.length) {
+
+    twitchResultsEl.innerHTML =
+      '<div class="empty">Twitchの配信データがありません。</div>';
+
+    return;
+  }
+
+  twitchResultsEl.innerHTML = `
+
+    <div class="grid">
+
+      ${twitchVideos
+        .map(
+          v => `
+
+            <article class="card">
+
+              <a
+                href="${v.url}"
+                target="_blank"
+                rel="noopener"
+                class="thumbnail-link"
+              >
+
+                <img
+                  class="thumbnail"
+                  src="${v.thumbnail || ""}"
+                  alt=""
+                >
+
+              </a>
+
+              <div class="date">
+                ${v.date}
+              </div>
+
+              <h2>
+                ${escapeHtml(v.title)}
+              </h2>
+
+              <div class="meta">
+
+                <span class="tag">
+                  👾 Twitch
+                </span>
+
+                ${
+                  v.game
+                    ? `
+                      <span class="tag">
+                        ${escapeHtml(v.game)}
+                      </span>
+                    `
+                    : ""
+                }
+
+              </div>
+
+              <a
+                href="${v.url}"
+                target="_blank"
+                rel="noopener"
+              >
+                Twitchで見る →
+              </a>
+
+            </article>
+
+          `
+        )
+        .join("")}
+
+    </div>
+
+  `;
+}
