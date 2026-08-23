@@ -263,9 +263,17 @@ function render() {
 
               <div class="meta">
 
-                <span class="tag">
-                  ${escapeHtml(v.type)}
-                </span>
+<a
+  href="${v.url}"
+  target="_blank"
+  rel="noopener"
+>
+  ${
+    v.platform === "Twitch"
+      ? "Twitchで見る →"
+      : "YouTubeで見る →"
+  }
+</a>
 
                 ${
                   v.game
