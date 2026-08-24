@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-08-24",
+    "title": "【Part3】100日間ハードコアを生き抜くマイクラ【Minecraft】",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=ulcNqVzKac4",
+    "videoId": "ulcNqVzKac4"
+  },
+  {
+    "date": "2026-08-24",
+    "title": "GEN村めっちゃカメレオン",
+    "type": "VIDEO",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=RRVJ5UcZO50",
+    "videoId": "RRVJ5UcZO50"
+  },
+  {
+    "date": "2026-08-24",
     "title": "アドミンジジイor直近ジジイorマッドメイト【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
