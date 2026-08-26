@@ -24,18 +24,36 @@
     <div id="events"></div>
   </section>
 
-  <!-- TimeTree -->
-  <section class="timetree-section">
-    <h2>📅 中野あるまスケジュール</h2>
+  <!-- 配信・動画カレンダー -->
+  <section class="calendar-section">
+    <h2>📅 配信・動画カレンダー</h2>
 
-    <iframe
-      title="中野あるまスケジュール"
-      src="https://timetreeapp.com/public_calendars/alma_schedule/embed/monthly?calendar_name=true&frame_color=%232ecc87"
-      loading="lazy">
-    </iframe>
+    <div class="calendar-header">
+      <button id="prevMonth">‹</button>
+      <div id="calendarMonth"></div>
+      <button id="nextMonth">›</button>
+    </div>
+
+    <div class="calendar-week">
+      <div>日</div>
+      <div>月</div>
+      <div>火</div>
+      <div>水</div>
+      <div>木</div>
+      <div>金</div>
+      <div>土</div>
+    </div>
+
+    <div id="calendar" class="calendar"></div>
+
+    <div class="calendar-legend">
+      <span class="legend-video">● 動画</span>
+      <span class="legend-live">● 配信</span>
+      <span class="legend-short">● SHORT</span>
+    </div>
   </section>
 
-  <!-- 検索 -->
+  <!-- 検索・絞り込み -->
   <section class="controls">
     <input
       id="search"
