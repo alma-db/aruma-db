@@ -707,3 +707,10 @@ main.wrap {
   font-weight: bold;
   text-align: center;
 }
+.timetree-section iframe {
+  width: 100%;
+  min-height: 700px;
+  aspect-ratio: 680 / 720;
+  border: none;
+  display: block;
+}
