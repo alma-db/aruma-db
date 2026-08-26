@@ -477,10 +477,10 @@ function renderCalendar() {
         v => v.date === date
       );
 
-    const hasCast =
-      twitcasting.some(
-        t => t.date === date
-      );
+const dayCast =
+  twitcasting.filter(t =>
+    String(t.date || "").slice(0, 10) === date
+  );
 
 
     html += `
@@ -550,16 +550,19 @@ function renderCalendar() {
 
           <!-- ツイキャス -->
 
-          ${
-            hasCast
-              ? `
-                <div class="calendar-twitcasting">
-                  🎙️ ツイキャス
-                </div>
-              `
-              : ""
-          }
-
+${dayCast.map(t => `
+  <a
+    href="${t.url || "#"}"
+    target="_blank"
+    rel="noopener"
+    class="calendar-item calendar-twitcasting"
+    title="${escapeHtml(t.title || "ツイキャス")}"
+  >
+    <span>
+      🎙️ ツイキャス
+    </span>
+  </a>
+`).join("")}
         </div>
 
       </div>
