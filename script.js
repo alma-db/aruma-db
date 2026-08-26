@@ -604,7 +604,7 @@ function getTypeLabel(type) {
   }
 
   if (type === "TWITCH") {
-    return "👾 Twitch";
+    return "Twitch";
   }
 
   return "動画";
