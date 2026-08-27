@@ -23,6 +23,11 @@ const calendarMonthEl = $("#calendarMonth");
 const prevMonthEl = $("#prevMonth");
 const nextMonthEl = $("#nextMonth");
 
+
+/* =========================
+   共通
+========================= */
+
 function escapeHtml(s) {
   return String(s ?? "").replace(/[&<>"']/g, c => ({
     "&": "&amp;",
@@ -33,11 +38,13 @@ function escapeHtml(s) {
   })[c]);
 }
 
+
 function twitchThumbnail(url, width = 640, height = 360) {
   return String(url || "")
     .replace("%{width}", width)
     .replace("%{height}", height);
 }
+
 
 /* =========================
    データ読み込み
@@ -143,8 +150,10 @@ function render() {
       : filtered.slice(0, INITIAL_VIDEO_COUNT);
 
   if (!filtered.length) {
+
     resultsEl.innerHTML =
       '<div class="empty">条件に一致するデータがありません。</div>';
+
     return;
   }
 
@@ -167,6 +176,7 @@ function render() {
         <tbody>
           ${list.map(v => `
             <tr>
+
               <td>${v.date}</td>
 
               <td>
@@ -179,9 +189,14 @@ function render() {
                 </a>
               </td>
 
-              <td>${escapeHtml(v.type)}</td>
+              <td>
+                ${escapeHtml(v.type)}
+              </td>
 
-              <td>${escapeHtml(v.game || "")}</td>
+              <td>
+                ${escapeHtml(v.game || "")}
+              </td>
+
             </tr>
           `).join("")}
         </tbody>
@@ -213,11 +228,13 @@ function render() {
             rel="noopener"
             class="thumbnail-link"
           >
+
             <img
               class="thumbnail"
               src="https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg"
               alt=""
             >
+
           </a>
 
           ${
@@ -322,9 +339,7 @@ function renderTwitch() {
 
             <img
               class="thumbnail"
-              src="${twitchThumbnail(
-                v.thumbnail
-              )}"
+              src="${twitchThumbnail(v.thumbnail)}"
               alt=""
             >
 
@@ -349,7 +364,7 @@ function renderTwitch() {
             </a>
 
             <span class="tag">
-              👾 Twitch
+              Twitch
             </span>
 
             ${
@@ -467,20 +482,29 @@ function renderCalendar() {
     const date =
       `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
+
+    /* YouTube */
+
     const dayVideos =
       videos.filter(
-        v => v.date === date
+        v => String(v.date || "").slice(0, 10) === date
       );
+
+
+    /* Twitch */
 
     const dayTwitch =
       twitchVideos.filter(
-        v => v.date === date
+        v => String(v.date || "").slice(0, 10) === date
       );
 
-const dayCast =
-  twitcasting.filter(t =>
-    String(t.date || "").slice(0, 10) === date
-  );
+
+    /* ツイキャス */
+
+    const dayCast =
+      twitcasting.filter(
+        t => String(t.date || "").slice(0, 10) === date
+      );
 
 
     html += `
@@ -491,6 +515,7 @@ const dayCast =
         </div>
 
         <div class="calendar-items">
+
 
           <!-- YouTube -->
 
@@ -540,7 +565,7 @@ const dayCast =
               >
 
               <span>
-                👾 Twitch
+                Twitch
               </span>
 
             </a>
@@ -550,19 +575,24 @@ const dayCast =
 
           <!-- ツイキャス -->
 
-${dayCast.map(t => `
-  <a
-    href="${t.url || "#"}"
-    target="_blank"
-    rel="noopener"
-    class="calendar-item calendar-twitcasting"
-    title="${escapeHtml(t.title || "ツイキャス")}"
-  >
-    <span>
-      🎙️ ツイキャス
-    </span>
-  </a>
-`).join("")}
+          ${dayCast.map(t => `
+
+            <div
+              class="calendar-item calendar-twitcasting"
+              title="${escapeHtml(
+                t.title || "ツイキャス"
+              )}"
+            >
+
+              <span>
+                🎙️ ツイキャス
+              </span>
+
+            </div>
+
+          `).join("")}
+
+
         </div>
 
       </div>
@@ -795,6 +825,7 @@ function renderEvents() {
       let status;
       let statusClass;
 
+
       if (today < start) {
 
         status = "開催予定";
@@ -880,9 +911,7 @@ function renderEvents() {
    イベント日付
 ========================= */
 
-function formatEventDate(
-  dateString
-) {
+function formatEventDate(dateString) {
 
   const date =
     new Date(dateString);
