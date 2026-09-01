@@ -2,8 +2,8 @@
   {
     "date": "2026-09-01",
     "title": "アルジャンめっちゃカメレオン",
-    "type": "VIDEO",
-    "isLive": false,
+    "type": "LIVE",
+    "isLive": true,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=L5qOJrshjzo",
