@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-09-01",
+    "title": "アルジャンめっちゃカメレオン",
+    "type": "VIDEO",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=L5qOJrshjzo",
+    "videoId": "L5qOJrshjzo"
+  },
+  {
+    "date": "2026-09-01",
     "title": "1000円で腹がいっぱいになる店はどこか論争【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
