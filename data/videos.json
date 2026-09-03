@@ -2,8 +2,8 @@
   {
     "date": "2026-09-03",
     "title": "高田村めっちゃカメレオン",
-    "type": "VIDEO",
-    "isLive": false,
+    "type": "LIVE",
+    "isLive": true,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=7rvweQ2G5Xc",
