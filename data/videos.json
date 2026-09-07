@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-09-07",
+    "title": "【Part7】100日間ハードコアを生き抜くマイクラ【Minecraft】",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=xw9E2dQrkA8",
+    "videoId": "xw9E2dQrkA8"
+  },
+  {
+    "date": "2026-09-07",
     "title": "この２インポスターはすぐ分かっちゃうんだ【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
