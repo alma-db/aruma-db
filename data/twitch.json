@@ -86,16 +86,5 @@
     "url": "https://www.twitch.tv/videos/2816390973",
     "videoId": "2816390973",
     "thumbnail": "https://static-cdn.jtvnw.net/cf_vods/d3vd9lfkzbru3h/866a23524b8b256cd073_nakanoalma_316212321779_1783657872//thumb/thumb0-%{width}x%{height}.jpg"
-  },
-  {
-    "date": "2026-07-09",
-    "title": "1日目～ 平日の深夜から7DTD",
-    "type": "TWITCH",
-    "platform": "Twitch",
-    "game": "",
-    "participants": [],
-    "url": "https://www.twitch.tv/videos/2815975003",
-    "videoId": "2815975003",
-    "thumbnail": "https://static-cdn.jtvnw.net/cf_vods/d3vd9lfkzbru3h/0f52142c634efe555972_nakanoalma_316147452273_1783621940//thumb/thumb0-%{width}x%{height}.jpg"
   }
 ]
