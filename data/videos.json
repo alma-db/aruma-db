@@ -2,12 +2,22 @@
   {
     "date": "2026-09-10",
     "title": "高田村が無くなって暇になった人たちで桃鉄",
-    "type": "VIDEO",
-    "isLive": false,
+    "type": "LIVE",
+    "isLive": true,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=iKGinxBgJf4",
     "videoId": "iKGinxBgJf4"
+  },
+  {
+    "date": "2026-09-10",
+    "title": "【Part10】100日間ハードコアを生き抜くマイクラ【Minecraft】",
+    "type": "VIDEO",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=Z3WeutyehSc",
+    "videoId": "Z3WeutyehSc"
   },
   {
     "date": "2026-09-10",
