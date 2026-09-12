@@ -2,8 +2,8 @@
   {
     "date": "2026-09-12",
     "title": "高田村ガーティックフォン【gartic phone】",
-    "type": "VIDEO",
-    "isLive": false,
+    "type": "LIVE",
+    "isLive": true,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=xyekrCK53y0",
