@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-09-19",
+    "title": "高田村が無くなって暇になった人たちでマリオパーティジャンボリー",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=HulKJG1ZcGE",
+    "videoId": "HulKJG1ZcGE"
+  },
+  {
+    "date": "2026-09-19",
     "title": "【その4】高田村メンバーで超サバイバル【VALHEIM】",
     "type": "VIDEO",
     "isLive": false,
@@ -8,16 +18,6 @@
     "participants": [],
     "url": "https://www.youtube.com/watch?v=_IYAD3tVT-I",
     "videoId": "_IYAD3tVT-I"
-  },
-  {
-    "date": "2026-09-19",
-    "title": "高田村が無くなって暇になった人たちでマリオパーティジャンボリー",
-    "type": "VIDEO",
-    "isLive": false,
-    "game": "",
-    "participants": [],
-    "url": "https://www.youtube.com/watch?v=HulKJG1ZcGE",
-    "videoId": "HulKJG1ZcGE"
   },
   {
     "date": "2026-09-19",
