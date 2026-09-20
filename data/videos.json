@@ -2,8 +2,8 @@
   {
     "date": "2026-09-20",
     "title": "【その5】高田村メンバーで超サバイバル【VALHEIM】",
-    "type": "VIDEO",
-    "isLive": false,
+    "type": "LIVE",
+    "isLive": true,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=96-6w9Lt1tg",
@@ -12,7 +12,7 @@
   {
     "date": "2026-09-20",
     "title": "能力が１つずつ無い猿たちが協力して爆弾解除するゲーム【BOMBANANA!】",
-    "type": "VIDEO",
+    "type": "LIVE",
     "isLive": false,
     "game": "",
     "participants": [],
