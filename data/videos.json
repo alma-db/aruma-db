@@ -2,8 +2,8 @@
   {
     "date": "2026-09-21",
     "title": "【その6】高田村メンバーで超サバイバル【VALHEIM】",
-    "type": "VIDEO",
-    "isLive": false,
+    "type": "LIVE",
+    "isLive": true,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=eCrxhk-8s9s",
@@ -12,7 +12,7 @@
   {
     "date": "2026-09-21",
     "title": "GEN村でガーティックフォンやります",
-    "type": "VIDEO",
+    "type": "LIVE",
     "isLive": false,
     "game": "",
     "participants": [],
