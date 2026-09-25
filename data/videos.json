@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-09-25",
+    "title": "高田村でガーティックフォンやります",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=FYqmILTlazk",
+    "videoId": "FYqmILTlazk"
+  },
+  {
+    "date": "2026-09-25",
     "title": "人生初のネットオリパで20万ポイント引いてみた結果ｗｗｗｗｗ",
     "type": "VIDEO",
     "isLive": false,
