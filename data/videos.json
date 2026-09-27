@@ -1,9 +1,19 @@
 [
   {
     "date": "2026-09-27",
-    "title": "【中野あるま視点】ションさんが人狼が勝つように作為した人狼ゲーム",
+    "title": "２週間ぶりのフルパバロ【VALORANT】",
     "type": "LIVE",
     "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=7q4YTpq4HSs",
+    "videoId": "7q4YTpq4HSs"
+  },
+  {
+    "date": "2026-09-27",
+    "title": "【中野あるま視点】ションさんが人狼が勝つように作為した人狼ゲーム",
+    "type": "LIVE",
+    "isLive": false,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=sWnNoSqiaDA",
