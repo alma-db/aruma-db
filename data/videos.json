@@ -1,23 +1,23 @@
 [
   {
     "date": "2026-09-30",
-    "title": "高田村で人の名前作りバトル",
-    "type": "LIVE",
-    "isLive": true,
-    "game": "",
-    "participants": [],
-    "url": "https://www.youtube.com/watch?v=-W1WuPkn5Jk",
-    "videoId": "-W1WuPkn5Jk"
-  },
-  {
-    "date": "2026-09-30",
     "title": "【その12】高田村メンバーで超サバイバル【VALHEIM】",
-    "type": "VIDEO",
+    "type": "LIVE",
     "isLive": false,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=2XpwG_2w7-A",
     "videoId": "2XpwG_2w7-A"
+  },
+  {
+    "date": "2026-09-30",
+    "title": "高田村で人の名前作りバトル",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=-W1WuPkn5Jk",
+    "videoId": "-W1WuPkn5Jk"
   },
   {
     "date": "2026-09-29",
