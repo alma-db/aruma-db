@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-10-08",
+    "title": "【その17】高田村メンバーで超サバイバル【VALHEIM】",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=_fwEh0lLeLk",
+    "videoId": "_fwEh0lLeLk"
+  },
+  {
+    "date": "2026-10-08",
+    "title": "【2026/10/8】高田村でアモアス配信！【AmongUs / 宇宙人狼】",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=LmZ2r6Tl5Vk",
+    "videoId": "LmZ2r6Tl5Vk"
+  },
+  {
+    "date": "2026-10-08",
     "title": "妖怪ベントパカパカおじさん【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
