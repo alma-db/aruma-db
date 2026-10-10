@@ -1,6 +1,16 @@
 [
   {
     "date": "2026-10-10",
+    "title": "２日連続フルパバロ【VALORANT】",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=o41j6p6O48g",
+    "videoId": "o41j6p6O48g"
+  },
+  {
+    "date": "2026-10-10",
     "title": "元郵便局員ゴールド免許の男が妹にガチで運転を教える",
     "type": "LIVE",
     "isLive": false,
