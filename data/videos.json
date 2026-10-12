@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-10-12",
+    "title": "【その18】高田村メンバーで超サバイバル【VALHEIM】",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=8hv5MLHWLFw",
+    "videoId": "8hv5MLHWLFw"
+  },
+  {
+    "date": "2026-10-12",
+    "title": "【2026/10/12】GEN村でアモアス配信！【AmongUs / 宇宙人狼】",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=jMY7FXc_uYU",
+    "videoId": "jMY7FXc_uYU"
+  },
+  {
+    "date": "2026-10-12",
     "title": "【急募】足湯さんの視点を早急にください【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
