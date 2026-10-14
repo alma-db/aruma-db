@@ -2,8 +2,8 @@
   {
     "date": "2026-10-14",
     "title": "【その19】高田村メンバーで超サバイバル【VALHEIM】",
-    "type": "VIDEO",
-    "isLive": false,
+    "type": "LIVE",
+    "isLive": true,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=kq_tfKSsYdQ",
@@ -12,7 +12,7 @@
   {
     "date": "2026-10-14",
     "title": "【2026/10/14】高田村でアモアス配信！【AmongUs / 宇宙人狼】",
-    "type": "VIDEO",
+    "type": "LIVE",
     "isLive": false,
     "game": "",
     "participants": [],
