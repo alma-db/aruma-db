@@ -1,9 +1,19 @@
 [
   {
     "date": "2026-10-15",
+    "title": "やっぱりバロやるフルパバロ【VALORANT】",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=8f66bpDRoJ4",
+    "videoId": "8f66bpDRoJ4"
+  },
+  {
+    "date": "2026-10-15",
     "title": "【2026/10/15】高田村でアモアス配信！【AmongUs / 宇宙人狼】",
     "type": "LIVE",
-    "isLive": true,
+    "isLive": false,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=tUTKrky3PiY",
