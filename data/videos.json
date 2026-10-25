@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-10-25",
+    "title": "【Part2】山岡家に行ってきた男のラーメン屋を見よ【Japanese Ramen Simulator】",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=hzWNwez9Kok",
+    "videoId": "hzWNwez9Kok"
+  },
+  {
+    "date": "2026-10-25",
+    "title": "【2026/10/25】高田村でアモアス配信！【AmongUs / 宇宙人狼】",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=1XL8QwsaqMA",
+    "videoId": "1XL8QwsaqMA"
+  },
+  {
+    "date": "2026-10-25",
     "title": "【過去最多】１ターンのみで５人がマッド否定ｗｗｗｗｗ【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
@@ -71,7 +91,7 @@
   },
   {
     "date": "2026-10-21",
-    "title": "今日から漢のラーメン屋を経営します【Japanese Ramen Simulator】",
+    "title": "【Part1】今日から漢のラーメン屋を経営します【Japanese Ramen Simulator】",
     "type": "LIVE",
     "isLive": false,
     "game": "",
