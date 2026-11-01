@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-11-01",
+    "title": "高田村R.E.P.O.",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=bdb0R1abkMU",
+    "videoId": "bdb0R1abkMU"
+  },
+  {
+    "date": "2026-11-01",
+    "title": "またもや少し珍しいメンツのフルパバロラント【VALORANT】",
+    "type": "VIDEO",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=kHVID8BVk-c",
+    "videoId": "kHVID8BVk-c"
+  },
+  {
+    "date": "2026-11-01",
     "title": "タスクがこんなに被る事ってある！？【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
