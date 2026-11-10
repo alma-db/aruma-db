@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-11-10",
+    "title": "1週間ぶりのフルパバロラント【VALORANT】",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=EBeKH4v7b-g",
+    "videoId": "EBeKH4v7b-g"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "【Part1】最強の動物園を作るシミュレーションゲーム【プラネット ズー2】",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=u1OGazm0XO4",
+    "videoId": "u1OGazm0XO4"
+  },
+  {
+    "date": "2026-11-10",
     "title": "絶対に誰もいない場所を最終位置にするマッドメイトｗｗｗｗｗ【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
