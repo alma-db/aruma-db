@@ -1,23 +1,23 @@
 [
   {
     "date": "2026-11-18",
-    "title": "【2026/11/18】高田村でアモアス配信！【AmongUs / 宇宙人狼】",
-    "type": "LIVE",
-    "isLive": true,
-    "game": "",
-    "participants": [],
-    "url": "https://www.youtube.com/watch?v=jlrhZ9GPLKY",
-    "videoId": "jlrhZ9GPLKY"
-  },
-  {
-    "date": "2026-11-18",
     "title": "アルジャン大運動会：チームスリザリン顔合わせ",
-    "type": "VIDEO",
+    "type": "LIVE",
     "isLive": false,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=Si9XFatsHuo",
     "videoId": "Si9XFatsHuo"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "【2026/11/18】高田村でアモアス配信！【AmongUs / 宇宙人狼】",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=jlrhZ9GPLKY",
+    "videoId": "jlrhZ9GPLKY"
   },
   {
     "date": "2026-11-17",
