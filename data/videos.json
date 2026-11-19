@@ -1,23 +1,23 @@
 [
   {
     "date": "2026-11-19",
-    "title": "【2026/11/19】高田村でアモアス配信！【AmongUs / 宇宙人狼】",
-    "type": "LIVE",
-    "isLive": true,
-    "game": "",
-    "participants": [],
-    "url": "https://www.youtube.com/watch?v=Pnrf0nvGRWY",
-    "videoId": "Pnrf0nvGRWY"
-  },
-  {
-    "date": "2026-11-19",
     "title": "久しぶりのぺぇいん青年会【Feign / おバカ人狼】",
-    "type": "VIDEO",
+    "type": "LIVE",
     "isLive": false,
     "game": "",
     "participants": [],
     "url": "https://www.youtube.com/watch?v=t0apy4UV6Xo",
     "videoId": "t0apy4UV6Xo"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "【2026/11/19】高田村でアモアス配信！【AmongUs / 宇宙人狼】",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=Pnrf0nvGRWY",
+    "videoId": "Pnrf0nvGRWY"
   },
   {
     "date": "2026-11-19",
