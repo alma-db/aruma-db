@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-11-21",
+    "title": "【中野あるま視点】アルジャン大運動会",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=Vc77XkfoSos",
+    "videoId": "Vc77XkfoSos"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "【中野あるま視点】アルジャン大運動会",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=hgC5clccfbc",
+    "videoId": "hgC5clccfbc"
+  },
+  {
+    "date": "2026-11-21",
     "title": "このスキン懐かしいなあ【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
