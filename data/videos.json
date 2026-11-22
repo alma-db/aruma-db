@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-11-22",
+    "title": "【中野あるま視点】カプラ・リブラス神人狼",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=H-6db3FaEWY",
+    "videoId": "H-6db3FaEWY"
+  },
+  {
+    "date": "2026-11-22",
+    "title": "【その10】高田村メンバーでゾンビの世界を生き残る【7 days to die】",
+    "type": "VIDEO",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=0PvMTbbr8yg",
+    "videoId": "0PvMTbbr8yg"
+  },
+  {
+    "date": "2026-11-22",
     "title": "ボタン連打してただけで、マッドを特定したｗｗｗｗｗ【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
