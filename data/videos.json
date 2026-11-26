@@ -1,6 +1,26 @@
 [
   {
     "date": "2026-11-26",
+    "title": "３日ぶりのフルパバロラント【VALORANT】",
+    "type": "LIVE",
+    "isLive": true,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=s__yoaSnevA",
+    "videoId": "s__yoaSnevA"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "【2026/11/26】高田村でアモアス配信！【AmongUs / 宇宙人狼】",
+    "type": "LIVE",
+    "isLive": false,
+    "game": "",
+    "participants": [],
+    "url": "https://www.youtube.com/watch?v=xzWWRUTwEmI",
+    "videoId": "xzWWRUTwEmI"
+  },
+  {
+    "date": "2026-11-26",
     "title": "クルー達を喧嘩させるマッドメイトｗｗｗｗｗ【AmongUs / 宇宙人狼】",
     "type": "VIDEO",
     "isLive": false,
